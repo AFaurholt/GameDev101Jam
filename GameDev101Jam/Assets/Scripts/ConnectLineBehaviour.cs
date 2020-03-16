@@ -2,23 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConnectLineBehaviour : MonoBehaviour
+namespace com.runtime.GameDev101Jam
 {
-    public Transform PointATransform = default;
-    public Transform PointBTransform = default;
-
-    private LineRenderer _lineRenderer = default;
-
-    private void Awake()
+    public class ConnectLineBehaviour : MonoBehaviour
     {
-        _lineRenderer = GetComponent<LineRenderer>();
-    }
+        public Transform PointATransform = default;
+        public Transform PointBTransform = default;
 
-    private void Update()
-    {
-        Vector3[] points = new Vector3[2];
-        points[0] = PointATransform.position;
-        points[1] = PointBTransform.position;
-        _lineRenderer.SetPositions(points);
+        private LineRenderer _lineRenderer = default;
+
+        private void Awake()
+        {
+            _lineRenderer = GetComponent<LineRenderer>();
+        }
+
+        private void Update()
+        {
+            Vector3[] points = new Vector3[2];
+            points[0] = PointATransform.position;
+            points[1] = PointBTransform.position;
+            _lineRenderer.SetPositions(points);
+        }
     }
 }
