@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 5045180146103419533}
   - component: {fileID: 5045180146103419532}
   - component: {fileID: 5045180146103419528}
+  - component: {fileID: -3509135297658024105}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: PlayableGraphNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,3 +107,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deea3d2f0fdad4a47850f350b7915522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3509135297658024105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5045180146103419535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6641d84751271ae45826259dd20f4fc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Difficulty: 1
+  PortName: Unnamed
+  IsOpen: 1
+  IsVisible: 0
+  passwordSetting: {fileID: 11400000, guid: 20d6f77e45226214da9a0326d74a7ec9, type: 2}
