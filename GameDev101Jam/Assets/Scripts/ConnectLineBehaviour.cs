@@ -6,8 +6,9 @@ namespace com.runtime.GameDev101Jam
 {
     public class ConnectLineBehaviour : MonoBehaviour
     {
-        public Transform PointATransform = default;
-        public Transform PointBTransform = default;
+        public Transform FromTransform = default;
+        public Transform ToTransform = default;
+        public bool IsTwoWay = false;
 
         private LineRenderer _lineRenderer = default;
 
@@ -19,8 +20,8 @@ namespace com.runtime.GameDev101Jam
         private void Update()
         {
             Vector3[] points = new Vector3[2];
-            points[0] = PointATransform.position;
-            points[1] = PointBTransform.position;
+            points[0] = FromTransform.position;
+            points[1] = ToTransform.position;
             _lineRenderer.SetPositions(points);
         }
     }
