@@ -12,6 +12,6 @@ namespace com.runtime.GameDev101Jam
 
         private void Sell(InventoryItem item) { }
 
-        private void Consume(InventoryItem item) { }
+        private void Activate(InventoryItem item) { }
     }
 }

@@ -7,6 +7,6 @@ namespace com.runtime.GameDev101Jam
     [CreateAssetMenu(fileName = "InventoryItem", menuName = "InventorySystem/InventoryItem", order = 1)]
     public class InventoryItem : ScriptableObject
     {
-
+        private float _techLevel;
     }
 }
