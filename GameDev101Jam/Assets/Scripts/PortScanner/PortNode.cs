@@ -8,7 +8,7 @@ namespace com.runtime.GameDev101Jam
 {
     class PortNode
     {
-        private float _difficulty;
+        private float _techLevel;
         private string _portName;
         private bool _isOpen;
         private bool _isVisible;

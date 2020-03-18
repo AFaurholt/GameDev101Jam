@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 931665501209244240}
   - component: {fileID: 931665501209244243}
   - component: {fileID: 931665501209244242}
+  - component: {fileID: -8645033016850898587}
   m_Layer: 0
-  m_Name: Line
+  m_Name: PlayableGraphEdge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -141,5 +142,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c797eecc4fe784990452dd9bfe6970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PointATransform: {fileID: 0}
-  PointBTransform: {fileID: 0}
+  FromTransform: {fileID: 0}
+  ToTransform: {fileID: 0}
+  IsTwoWay: 0
+--- !u!114 &-8645033016850898587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931665501209244237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e4b38c578351d4c8a6551e49c2b3a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -6,7 +6,6 @@ namespace com.runtime.GameDev101Jam
 {
     public class ConnectLineBehaviour : MonoBehaviour
     {
-        //I'm a test commit
         public Transform FromTransform = default;
         public Transform ToTransform = default;
         public bool IsTwoWay = false;
