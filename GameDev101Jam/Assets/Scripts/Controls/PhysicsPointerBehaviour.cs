@@ -16,8 +16,6 @@ namespace com.runtime.GameDev101Jam
         private void Start()
         {
             cursorImage = cursorCanvas.GetComponentInChildren<Image>();
-            //defaultCursorTexture.Resize((int)(defaultCursorTexture.width * defaultCursorScale), (int)(defaultCursorTexture.height * defaultCursorScale));
-            //Cursor.SetCursor(defaultCursorTexture, new Vector2(defaultCursorTexture.width / 2, defaultCursorTexture.height / 2), CursorMode.Auto);
             Cursor.visible = false;
         }
 
