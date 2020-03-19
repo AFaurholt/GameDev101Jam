@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace com.runtime.GameDev101Jam
 {
@@ -18,6 +18,29 @@ namespace com.runtime.GameDev101Jam
         public PortNode()
         {
             _outgoingPortEdges = new HashSet<PortEdge>();
+        }
+
+        public PortNode(PlayablePasswordSetting playablePasswordSetting) : this()
+        {
+            string passwordString = "";
+            int pwLength = Random.Range(playablePasswordSetting.MinLength, playablePasswordSetting.MaxLength + 1);
+            string[] allowedChars = playablePasswordSetting.AllowedCharacters.Split(playablePasswordSetting.SPLIT_CHAR);
+            int maxChar = allowedChars.Length;
+            for (int i = 0; i < pwLength; i++)
+            {
+                int randCharIndex = Random.Range(0, maxChar);
+                string randChar = allowedChars[randCharIndex];
+                if (randChar == playablePasswordSetting.CHARACTER_WILDCARD)
+                {
+                    randCharIndex = Random.Range(0, playablePasswordSetting.ALL_CHARACTERS.Length);
+                    passwordString += playablePasswordSetting.ALL_CHARACTERS[randCharIndex];
+                }
+                else
+                {
+                    passwordString += randChar;
+                }
+            }
+            _playablePassword = new PlayablePassword(passwordString, Random.Range(playablePasswordSetting.DifficultyMin, playablePasswordSetting.DifficultyMax));
         }
         public bool IsOpen
         {

@@ -13,12 +13,15 @@ namespace com.runtime.GameDev101Jam
         public string PortName = "Unnamed";
         public bool IsOpen = true;
         public bool IsVisible = false;
+        public PortNode PortNode;
 
         public PlayablePasswordSetting passwordSetting = default;
 
         private void Start()
         {
             gameObject.SetActive(IsVisible);
+            PortNode = new PortNode(passwordSetting);
+            Debug.Log(PortNode.PlayablePassword.PasswordString);
         }
     }
 }
