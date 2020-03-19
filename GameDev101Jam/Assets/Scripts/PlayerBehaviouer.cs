@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 namespace com.runtime.GameDev101Jam
@@ -9,6 +10,8 @@ namespace com.runtime.GameDev101Jam
         [SerializeField] private float _baseCpuPower = 100f;
         private Dictionary<InventoryItem, float> _cpuAllocation;
         private float _maxCpuAllocation = 100f;
+        [SerializeField] private float _crackingIntervalSec = 1f;
+        private float _currentIntervalSec = 0f;
 
         [SerializeField] private float _traceMax = 100f;
         [SerializeField] private float _currentTrace = 0f;
@@ -19,7 +22,7 @@ namespace com.runtime.GameDev101Jam
         private Inventory _upgradeInventory;
         private Inventory _consumeableInventory;
 
-        private PasswordBreaker _passwordBreakerBehaviour;
+        private PasswordBreaker _passwordBreaker = new PasswordBreaker();
         private List<PlayableNodeBehaviour> _portNodesBeingCracked = new List<PlayableNodeBehaviour>();
 
         // Start is called before the first frame update
@@ -31,9 +34,33 @@ namespace com.runtime.GameDev101Jam
         // Update is called once per frame
         void Update()
         {
+            _currentIntervalSec += Time.deltaTime;
+            if (_currentIntervalSec >= _crackingIntervalSec)
+            {
+                _currentIntervalSec = 0;
+                foreach (var item in _portNodesBeingCracked)
+                {
+                    item.PortNode.CrackPassword(_passwordBreaker, _baseCpuPower / _portNodesBeingCracked.Count);
 
+                    DebugPwCurrentProgress(item);
+                }
+            }
         }
 
+        void DebugPwCurrentProgress(PlayableNodeBehaviour playableNode)
+        {
+            foreach (var pair in playableNode.PortNode.PlayablePassword.CurrentProgress)
+            {
+                
+                char currentCharMarked = playableNode.PortNode.PlayablePassword.PasswordString[pair.Key];
+                string formattedString = $"<b><color=yellow>{currentCharMarked}</color></b>";
+                StringBuilder sb = new StringBuilder(playableNode.PortNode.PlayablePassword.PasswordString);
+                sb.Replace(currentCharMarked.ToString(), formattedString, pair.Key, 1);
+                formattedString = sb.ToString();
+                Debug.Log($"{formattedString} : {pair.Key} : {pair.Value}");
+            }
+            Debug.Log($"Password is broken: {playableNode.PortNode.PlayablePassword.IsBroken}");
+        }
         void AddNodeToBeingCracked(PlayableNodeBehaviour playableNode)
         {
             _portNodesBeingCracked.Add(playableNode);

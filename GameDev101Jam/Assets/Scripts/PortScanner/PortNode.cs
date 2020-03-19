@@ -15,6 +15,7 @@ namespace com.runtime.GameDev101Jam
         private PlayablePassword _playablePassword;
         private HashSet<PortEdge> _outgoingPortEdges;
 
+        #region ctor
         public PortNode()
         {
             _outgoingPortEdges = new HashSet<PortEdge>();
@@ -42,10 +43,24 @@ namespace com.runtime.GameDev101Jam
             }
             _playablePassword = new PlayablePassword(passwordString, Random.Range(playablePasswordSetting.DifficultyMin, playablePasswordSetting.DifficultyMax));
         }
+
+        public PortNode(PlayablePasswordSetting playablePasswordSetting, string portName, float techLevel, bool isOpen = true, bool isVisible = false) : this(playablePasswordSetting)
+        {
+            _portName = portName;
+            _techLevel = techLevel;
+            _isOpen = isOpen;
+            _isVisible = isVisible;
+        }
+        #endregion
         public bool IsOpen
         {
             get { return _isOpen; }
             set { _isOpen = value; }
+        }
+
+        public bool IsVisible
+        {
+            get { return _isVisible; }
         }
 
         public PlayablePassword PlayablePassword

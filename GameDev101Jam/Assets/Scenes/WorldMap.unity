@@ -615,6 +615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseCpuPower: 100
+  _crackingIntervalSec: 10
   _traceMax: 100
   _currentTrace: 0
 --- !u!1 &1029443519
@@ -860,6 +861,12 @@ PrefabInstance:
       propertyPath: IsVisible
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -3509135297658024105, guid: 8a29bbe69f4552640a9dc1ccf29bce24,
+        type: 3}
+      propertyPath: passwordSetting
+      value: 
+      objectReference: {fileID: 11400000, guid: 18088346e2e576d4aaca13ae9de1a5ed,
+        type: 2}
     - target: {fileID: 5045180146103419531, guid: 8a29bbe69f4552640a9dc1ccf29bce24,
         type: 3}
       propertyPath: m_LocalPosition.x
