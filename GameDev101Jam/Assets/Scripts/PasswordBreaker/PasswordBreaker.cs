@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace com.runtime.GameDev101Jam
 {
-    class PasswordBreakerBehaviour
+    class PasswordBreaker
     {
         public void CrackPassword(ref PlayablePassword playablePassword, float cpuStrength, Inventory upgradeInventory)
         {

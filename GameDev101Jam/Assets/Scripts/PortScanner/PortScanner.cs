@@ -8,7 +8,7 @@ namespace com.runtime.GameDev101Jam
 {
     class PortScanner
     {
-        public void ScanForPorts(PortNode portNode, float cpuStrength, Inventory upgradeInventory, PasswordBreakerBehaviour passwordBreaker)
+        public void ScanForPorts(PortNode portNode, float cpuStrength, Inventory upgradeInventory, PasswordBreaker passwordBreaker)
         {
             if (portNode.IsOpen && !portNode.PlayablePassword.IsBroken)
             {

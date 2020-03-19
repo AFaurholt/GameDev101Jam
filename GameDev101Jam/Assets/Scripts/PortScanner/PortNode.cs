@@ -59,7 +59,7 @@ namespace com.runtime.GameDev101Jam
             set { _outgoingPortEdges = value; }
         }
 
-        public void CrackPassword(PasswordBreakerBehaviour passwordBreaker, float cpuStrength)
+        public void CrackPassword(PasswordBreaker passwordBreaker, float cpuStrength)
         {
             passwordBreaker.CrackPassword(ref _playablePassword, cpuStrength, null);
         }
