@@ -14,7 +14,7 @@ namespace Tests
         [Test]
         public void ReturnFullPasswordString([Values("testString")]string fullString)
         {
-            IGameKey sut = new GameKey();
+            IGameKey sut = new GameKey(new string[] { fullString });
 
             Assert.That(fullString, Is.EqualTo(sut.GetPasswordString()));
         }
