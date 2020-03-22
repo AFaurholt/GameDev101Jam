@@ -10,14 +10,14 @@ namespace com.runtime.GameDev101Jam
     class PlayableNodeBehaviour : MonoBehaviour
     {
         //Only for setting in the editor
-        public float TechLevel = 1;
-        public string PortName = "Unnamed";
-        public bool IsOpen = true;
-        public bool IsVisible = false;
+        [SerializeField] private float _techLevel = 1;
+        [SerializeField] private string _portName = "Unnamed";
+        [SerializeField] private bool _isOpen = true;
+        [SerializeField] private bool _isVisible = false;
 
         public PortNode PortNode;
 
-        public PlayablePasswordSetting passwordSetting = default;
+        [SerializeField] private PlayablePasswordSetting _passwordSetting = default;
 
         //probably needs to be moved out
         public delegate void OnAddToCracking(PlayableNodeBehaviour playableNode);
@@ -25,8 +25,8 @@ namespace com.runtime.GameDev101Jam
 
         private void Start()
         {
-            gameObject.SetActive(IsVisible);
-            PortNode = new PortNode(passwordSetting, PortName, TechLevel, IsOpen, IsVisible);
+            gameObject.SetActive(_isVisible);
+            PortNode = new PortNode(_passwordSetting, _portName, _techLevel, _isOpen, _isVisible);
 
             Debug.Log(PortNode.PlayablePassword.PasswordString);
             Debug.Log(PortNode.PlayablePassword.Difficulty);
