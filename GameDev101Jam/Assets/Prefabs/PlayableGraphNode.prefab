@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5045180146103419532}
   - component: {fileID: 5045180146103419528}
   - component: {fileID: -3509135297658024105}
+  - component: {fileID: 423812878}
   m_Layer: 0
   m_Name: PlayableGraphNode
   m_TagString: Untagged
@@ -119,8 +120,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6641d84751271ae45826259dd20f4fc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Difficulty: 1
+  TechLevel: 1
   PortName: Unnamed
   IsOpen: 1
-  IsVisible: 0
-  passwordSetting: {fileID: 11400000, guid: 20d6f77e45226214da9a0326d74a7ec9, type: 2}
+  IsVisible: 1
+  passwordSetting: {fileID: 11400000, guid: 18088346e2e576d4aaca13ae9de1a5ed, type: 2}
+--- !u!114 &423812878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5045180146103419535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3093554ec2b2154d82cd81a7a365813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
