@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Summary">
+  <Summary>
+    <Generatedon>22/03/2020 - 20:22:10</Generatedon>
+    <Parser>MultiReportParser (2x CoberturaParser, 1x OpenCoverParser)</Parser>
+    <Assemblies>1</Assemblies>
+    <Classes>18</Classes>
+    <Files>18</Files>
+    <Coveredlines>0</Coveredlines>
+    <Uncoveredlines>276</Uncoveredlines>
+    <Coverablelines>276</Coverablelines>
+    <Totallines>678</Totallines>
+    <Linecoverage>0</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+  </Summary>
+  <Coverage>
+    <Assembly name="HackingGame" classes="18" coverage="0" coveredlines="0" coverablelines="276" totallines="678" branchcoverage="" coveredbranches="0" totalbranches="0">
+      <Class name="com.runtime.GameDev101Jam.ConnectLineBehaviour" coverage="0" coveredlines="0" coverablelines="13" totallines="28" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.GameManager" coverage="0" coveredlines="0" coverablelines="4" totallines="21" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.Inventory" coverage="0" coveredlines="0" coverablelines="3" totallines="17" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.PasswordBreaker" coverage="0" coveredlines="0" coverablelines="12" totallines="25" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.PhysicsPointerBehaviour" coverage="0" coveredlines="0" coverablelines="8" totallines="27" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.PlayableNodeBehaviour" coverage="0" coveredlines="0" coverablelines="17" totallines="44" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.PlayableNodeEdge" coverage="0" coveredlines="0" coverablelines="13" totallines="34" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.PlayableNodeGraph" coverage="0" coveredlines="0" coverablelines="1" totallines="14" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.PlayablePassword" coverage="0" coveredlines="0" coverablelines="18" totallines="55" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.PlayablePasswordSetting" coverage="0" coveredlines="0" coverablelines="8" totallines="31" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.PlayerBehaviouer" coverage="0" coveredlines="0" coverablelines="63" totallines="103" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.PointerSelectionBehaviour" coverage="0" coveredlines="0" coverablelines="28" totallines="57" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.PortEdge" coverage="0" coveredlines="0" coverablelines="1" totallines="21" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.PortNode" coverage="0" coveredlines="0" coverablelines="44" totallines="87" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.PortScanner" coverage="0" coveredlines="0" coverablelines="13" totallines="27" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.RandomExtensions" coverage="0" coveredlines="0" coverablelines="3" totallines="19" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.RotateBehaviour" coverage="0" coveredlines="0" coverablelines="7" totallines="20" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.SelectableBehaviour" coverage="0" coveredlines="0" coverablelines="20" totallines="48" branchcoverage="" coveredbranches="0" totalbranches="0" />
+    </Assembly>
+  </Coverage>
+</CoverageReport>
