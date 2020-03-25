@@ -15,11 +15,6 @@ namespace com.runtime.GameDev101Jam
             _gameKeyPartArray = passwordParts;
         }
 
-        public float AddProgress(float progress)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Crack(float power)
         {
             throw new NotImplementedException();

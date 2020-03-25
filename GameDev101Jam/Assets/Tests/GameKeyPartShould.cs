@@ -22,9 +22,18 @@ namespace Tests
         public void ReturnTrueIfBroken()
         {
             IGameKeyPart sut = new GameKeyPart("whatever");
+            sut.AddProgress(100f);
 
+            Assert.That(true, Is.EqualTo(sut.IsBroken()));
+        }
 
-            Assert.Fail();
+        [Test]
+        public void ReturnProgress([Values(0f, 1f, 1001f, 40f, 23f)]float val)
+        {
+            IGameKeyPart sut = new GameKeyPart("whatever");
+            sut.AddProgress(val);
+
+            Assert.That(val, Is.EqualTo(sut.GetProgress()));
         }
 
        

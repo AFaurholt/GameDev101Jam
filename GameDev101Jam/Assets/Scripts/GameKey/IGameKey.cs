@@ -11,7 +11,6 @@ namespace com.runtime.GameDev101Jam
         bool IsCracked();
         void Crack(float power);
         string GetPasswordString();
-        float AddProgress(float progress);
         float GetProgress();
     }
 }

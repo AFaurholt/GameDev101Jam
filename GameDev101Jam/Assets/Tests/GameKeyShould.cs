@@ -70,6 +70,29 @@ namespace Tests
             Assert.That(false, Is.EqualTo(sut.IsCracked()));
         }
 
+        [Test]
+        public void ReturnProgress()
+        {
+            MockGameKeyPart[] mockGameKeyPartsNoneBroken = new MockGameKeyPart[]
+              {
+                new MockGameKeyPart{_theString = "", _theProgress = 90f },
+                new MockGameKeyPart{_theString = "", _theProgress = 50f },
+                new MockGameKeyPart{_theString = "", _theProgress = 1f },
+                new MockGameKeyPart{_theString = "", _theProgress = 0f },
+              };
+
+            float actual = (90f + 50f + 1f + 0f) / 4f;
+            GameKey sut = new GameKey(mockGameKeyPartsNoneBroken);
+
+            Assert.That(actual, Is.EqualTo(sut.GetProgress()));
+        }
+
+        [Test]
+        public void CrackPassword()
+        {
+            Assert.Fail();
+        }
+
         class MockGameKeyPart : IGameKeyPart
         {
             public string _theString;
