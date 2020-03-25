@@ -18,6 +18,15 @@ namespace Tests
             Assert.That(stringPart, Is.EqualTo(sut.GetKeyPartString()));
         }
 
+        [Test]
+        public void ReturnTrueIfBroken()
+        {
+            IGameKeyPart sut = new GameKeyPart("whatever");
+
+
+            Assert.Fail();
+        }
+
        
     }
 }

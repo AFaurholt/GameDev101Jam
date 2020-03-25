@@ -10,21 +10,15 @@ namespace com.runtime.GameDev101Jam
     {
         IGameKeyPart[] _gameKeyPartArray;
 
-        public GameKey(string[] passwordString)
+        public GameKey(IGameKeyPart[] passwordParts)
         {
-
+            _gameKeyPartArray = passwordParts;
         }
 
-        //private IGameKeyPart[] GameKeyPartsGenerate(string[] input)
-        //{
-        //    IGameKeyPart[] gameKeyParts = new IGameKeyPart[input.Length];
-
-        //    for (int i = 0; i < input.Length; i++)
-        //    {
-
-        //        gameKeyParts[i] = new GameKeyPart(input[i]);
-        //    }
-        //}
+        public float AddProgress(float progress)
+        {
+            throw new NotImplementedException();
+        }
 
         public void Crack(float power)
         {
@@ -42,9 +36,21 @@ namespace com.runtime.GameDev101Jam
             return sb.ToString();
         }
 
-        public void IsCracked()
+        public float GetProgress()
         {
-            throw new NotImplementedException();
+            float progress = 0f;
+            foreach (var item in _gameKeyPartArray)
+            {
+                progress += item.GetProgress();
+            }
+            progress /= _gameKeyPartArray.Length;
+
+            return progress;
+        }
+
+        public bool IsCracked()
+        {
+            return GetProgress() >= 100f;
         }
     }
 }

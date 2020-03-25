@@ -12,7 +12,7 @@ namespace Tests
         [Test]
         public void GameKeyGeneratorShouldSimplePasses()
         {
-            // Use the Assert class to test conditions
+            Assert.Fail();
         }
 
        

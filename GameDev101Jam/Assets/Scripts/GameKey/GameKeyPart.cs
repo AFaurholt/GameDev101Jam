@@ -9,7 +9,7 @@ namespace com.runtime.GameDev101Jam
     public class GameKeyPart : IGameKeyPart
     {
         string _actualString;
-        float _breakProgress;
+        float _breakProgress = 0f;
 
         public GameKeyPart(string stringPart)
         {
@@ -19,6 +19,21 @@ namespace com.runtime.GameDev101Jam
         public string GetKeyPartString()
         {
             return _actualString;
+        }
+
+        public bool IsBroken()
+        {
+            return _breakProgress >= 100f;
+        }
+
+        public float AddProgress(float progress)
+        {
+            return _breakProgress += progress;
+        }
+
+        public float GetProgress()
+        {
+            return _breakProgress;
         }
     }
 }

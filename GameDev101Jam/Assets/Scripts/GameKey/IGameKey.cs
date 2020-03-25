@@ -8,8 +8,10 @@ namespace com.runtime.GameDev101Jam
 {
     public interface IGameKey
     {
-        void IsCracked();
+        bool IsCracked();
         void Crack(float power);
         string GetPasswordString();
+        float AddProgress(float progress);
+        float GetProgress();
     }
 }
