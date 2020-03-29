@@ -12,6 +12,8 @@ namespace com.runtime.GameDev101Jam
         float GetMaxDifficulty();
         string[] GetTokenArray();
         string GetWildCardToken();
+        string[] GetAllTokens();
+        string GetAllTokensAsString();
         int GetMinLength();
         int GetMaxLength();
     }

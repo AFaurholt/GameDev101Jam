@@ -1,23 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CoverageReport scope="Summary">
   <Summary>
-    <Generatedon>29/03/2020 - 00:15:05</Generatedon>
-    <Parser>MultiReportParser (11x CoberturaParser, 1x OpenCoverParser)</Parser>
+    <Generatedon>29/03/2020 - 18:52:00</Generatedon>
+    <Parser>MultiReportParser (18x CoberturaParser, 1x OpenCoverParser)</Parser>
     <Assemblies>1</Assemblies>
-    <Classes>20</Classes>
-    <Files>20</Files>
-    <Coveredlines>58</Coveredlines>
+    <Classes>21</Classes>
+    <Files>21</Files>
+    <Coveredlines>106</Coveredlines>
     <Uncoveredlines>276</Uncoveredlines>
-    <Coverablelines>334</Coverablelines>
-    <Totallines>791</Totallines>
-    <Linecoverage>17.3</Linecoverage>
+    <Coverablelines>382</Coverablelines>
+    <Totallines>873</Totallines>
+    <Linecoverage>27.7</Linecoverage>
     <Coveredbranches>0</Coveredbranches>
     <Totalbranches>0</Totalbranches>
   </Summary>
   <Coverage>
-    <Assembly name="HackingGame" classes="20" coverage="17.3" coveredlines="58" coverablelines="334" totallines="791" branchcoverage="" coveredbranches="0" totalbranches="0">
+    <Assembly name="HackingGame" classes="21" coverage="27.7" coveredlines="106" coverablelines="382" totallines="873" branchcoverage="" coveredbranches="0" totalbranches="0">
       <Class name="com.runtime.GameDev101Jam.ConnectLineBehaviour" coverage="0" coveredlines="0" coverablelines="13" totallines="28" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="com.runtime.GameDev101Jam.GameKey" coverage="100" coveredlines="41" coverablelines="41" totallines="74" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.GameKeyGenerator" coverage="100" coveredlines="48" coverablelines="48" totallines="82" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="com.runtime.GameDev101Jam.GameKeyPart" coverage="100" coveredlines="17" coverablelines="17" totallines="39" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="com.runtime.GameDev101Jam.GameManager" coverage="0" coveredlines="0" coverablelines="4" totallines="21" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="com.runtime.GameDev101Jam.Inventory" coverage="0" coveredlines="0" coverablelines="3" totallines="17" branchcoverage="" coveredbranches="0" totalbranches="0" />
