@@ -12,11 +12,17 @@ namespace Tests
 {
     public class GameKeyGeneratorShould
     {
-        float maxDiff1 = 1f, minDiff1 = 1f;
-        int maxLen1 = 1, minLen1 = 1;
-        string[] tokensEmpty = new string[] { }, tokensEmptyNullSpot = new string[] { "", "a", null }, tokensEmptySpot = new string[] { "" }, tokensNullSpot = new string[] { null }, tokensLegal = new string[] { "a" }, tokensWildcard = new string[] { "**" };
-
-        string defaultWildcard = "**";
+        private readonly float maxDiff1 = 1f;
+        private readonly float minDiff1 = 1f;
+        private readonly int maxLen1 = 1;
+        private readonly int minLen1 = 1;
+        private readonly string[] tokensEmpty = Array.Empty<string>();
+        private readonly string[] tokensEmptyNullSpot = new string[] { "", "a", null };
+        private readonly string[] tokensEmptySpot = new string[] { "" };
+        private readonly string[] tokensNullSpot = new string[] { null };
+        private readonly string[] tokensLegal = new string[] { "a" };
+        private readonly string[] tokensWildcard = new string[] { "**" };
+        readonly string defaultWildcard = "**";
 
         MockGameKeyGeneratorConfig minDefaultConfig, minWithEmptyNullSpotsConfig, minWithEmptySpotsConfig, minWithNullSpotsConfig, minWithAConfig, minWithWildcardConfig;
 
@@ -128,14 +134,13 @@ namespace Tests
 
         class MockGameKeyGeneratorConfig : IGameKeyGeneratorConfig
         {
-            float _maxDiff;
-            float _minDiff;
-            int _maxLen;
-            int _minLen;
-            string[] _tokens;
-            string _wildcard;
-
-            string[] _allTokens = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "y", "x", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "Y", "X", "Z" };
+            readonly float _maxDiff;
+            readonly float _minDiff;
+            readonly int _maxLen;
+            readonly int _minLen;
+            readonly string[] _tokens;
+            readonly string _wildcard;
+            readonly string[] _allTokens = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "y", "x", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "Y", "X", "Z" };
 
             public MockGameKeyGeneratorConfig(float maxDiff, float minDiff, int maxLen, int minLen, string[] tokens, string wildcard)
             {

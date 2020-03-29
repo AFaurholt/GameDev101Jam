@@ -10,8 +10,8 @@ namespace com.runtime.GameDev101Jam
 {
     public class GameKey : IGameKey
     {
-        IGameKeyPart[] _gameKeyPartArray;
-        float _difficulty;
+        readonly IGameKeyPart[] _gameKeyPartArray;
+        readonly float _difficulty;
 
         public GameKey(IGameKeyPart[] passwordParts)
         {

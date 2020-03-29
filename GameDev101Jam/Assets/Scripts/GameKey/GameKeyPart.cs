@@ -8,7 +8,7 @@ namespace com.runtime.GameDev101Jam
 {
     public class GameKeyPart : IGameKeyPart
     {
-        string _actualString;
+        readonly string _actualString;
         float _breakProgress = 0f;
 
         public GameKeyPart(string stringPart)
