@@ -4,12 +4,54 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using com.runtime.GameDev101Jam;
+using System;
 
 namespace Tests
 {
     [TestFixture]
     public class GameKeyShould
     {
+        MockGameKeyPart[] mockGameKeyPartsNoneBroken, mockGameKeyPartsSomeBroken,
+            mockGameKeyPartsBroken, mockGameKeyPartsZero;
+
+        [SetUp]
+        public void SetUp()
+        {
+            mockGameKeyPartsBroken = new MockGameKeyPart[]
+            {
+                new MockGameKeyPart{_theString = "", _theProgress = 100f },
+                new MockGameKeyPart{_theString = "", _theProgress = 100f },
+                new MockGameKeyPart{_theString = "", _theProgress = 100f },
+                new MockGameKeyPart{_theString = "", _theProgress = 100f },
+            };
+
+            mockGameKeyPartsSomeBroken = new MockGameKeyPart[]
+            {
+                new MockGameKeyPart{_theString = "", _theProgress = 100f },
+                new MockGameKeyPart{_theString = "", _theProgress = 0f },
+                new MockGameKeyPart{_theString = "", _theProgress = 100f },
+                new MockGameKeyPart{_theString = "", _theProgress = 99f },
+            };
+
+            mockGameKeyPartsNoneBroken = new MockGameKeyPart[]
+            {
+                new MockGameKeyPart{_theString = "", _theProgress = 90f },
+                new MockGameKeyPart{_theString = "", _theProgress = 50f },
+                new MockGameKeyPart{_theString = "", _theProgress = 1f },
+                new MockGameKeyPart{_theString = "", _theProgress = 0f },
+            };
+
+            mockGameKeyPartsZero = new MockGameKeyPart[]
+            {
+                new MockGameKeyPart{_theString = "a", _theProgress = 0f},
+                new MockGameKeyPart{_theString = "b", _theProgress = 0f},
+                new MockGameKeyPart{_theString = "c", _theProgress = 0f},
+                new MockGameKeyPart{_theString = "d", _theProgress = 0f},
+                new MockGameKeyPart{_theString = "e", _theProgress = 0f},
+                new MockGameKeyPart{_theString = "f", _theProgress = 0f},
+            };
+        }
+
         // A Test behaves as an ordinary method
         [Test]
         public void ReturnFullPasswordString([Values("testString")]string fullString)
@@ -27,14 +69,6 @@ namespace Tests
         [Test]
         public void BeBrokenIfAllPartsBroken()
         {
-            MockGameKeyPart[] mockGameKeyPartsBroken = new MockGameKeyPart[]
-            {
-                new MockGameKeyPart{_theString = "", _theProgress = 100f },
-                new MockGameKeyPart{_theString = "", _theProgress = 100f },
-                new MockGameKeyPart{_theString = "", _theProgress = 100f },
-                new MockGameKeyPart{_theString = "", _theProgress = 100f },
-            };
-
             GameKey sut = new GameKey(mockGameKeyPartsBroken);
 
             Assert.That(true, Is.EqualTo(sut.IsCracked()));
@@ -43,28 +77,14 @@ namespace Tests
         [Test]
         public void BeNotBrokenIfSomePartsBroken()
         {
-            MockGameKeyPart[] mockGameKeyPartsSomeBroken = new MockGameKeyPart[]
-            {
-                new MockGameKeyPart{_theString = "", _theProgress = 100f },
-                new MockGameKeyPart{_theString = "", _theProgress = 0f },
-                new MockGameKeyPart{_theString = "", _theProgress = 100f },
-                new MockGameKeyPart{_theString = "", _theProgress = 99f },
-            };
             GameKey sut = new GameKey(mockGameKeyPartsSomeBroken);
 
             Assert.That(false, Is.EqualTo(sut.IsCracked()));
         }
+
         [Test]
         public void BeNotBrokenIfNoPartsBroken()
         {
-            MockGameKeyPart[] mockGameKeyPartsNoneBroken = new MockGameKeyPart[]
-              {
-                new MockGameKeyPart{_theString = "", _theProgress = 90f },
-                new MockGameKeyPart{_theString = "", _theProgress = 50f },
-                new MockGameKeyPart{_theString = "", _theProgress = 1f },
-                new MockGameKeyPart{_theString = "", _theProgress = 0f },
-              };
-
             GameKey sut = new GameKey(mockGameKeyPartsNoneBroken);
 
             Assert.That(false, Is.EqualTo(sut.IsCracked()));
@@ -90,7 +110,20 @@ namespace Tests
         [Test]
         public void CrackPassword()
         {
-            Assert.Fail();
+            IGameKey sut = new GameKey(mockGameKeyPartsZero, 1f);
+            sut.Crack(10f);
+
+            Assert.That(sut.GetProgress(), Is.Not.Zero);
+            Assert.That(sut.GetProgress(), Is.Not.Null);
+            Assert.That(sut.GetProgress(), Is.Not.NaN);
+            Assert.That(float.IsInfinity(sut.GetProgress()), Is.False);
+        }
+
+        [Test]
+        public void CrackException()
+        {
+            IGameKey sut = new GameKey(mockGameKeyPartsZero);
+            Assert.Throws<InvalidOperationException>(() => sut.Crack(10));
         }
 
         class MockGameKeyPart : IGameKeyPart
