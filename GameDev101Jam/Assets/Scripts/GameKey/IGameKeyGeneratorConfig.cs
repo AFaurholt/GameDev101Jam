@@ -8,13 +8,14 @@ namespace com.runtime.GameDev101Jam
 {
     public interface IGameKeyGeneratorConfig
     {
-        float GetMinDifficulty();
-        float GetMaxDifficulty();
-        string[] GetTokenArray();
-        string GetWildCardToken();
-        string[] GetAllTokens();
+        float MinDifficulty { get; }
+        float MaxDifficulty { get; }
+        IReadOnlyList<string> TokenArray { get; }
+        string WildCardToken { get; }
+        IReadOnlyList<string> AllTokens { get; }
+        int MinLength { get; }
+        int MaxLength { get; }
+
         string GetAllTokensAsString();
-        int GetMinLength();
-        int GetMaxLength();
     }
 }

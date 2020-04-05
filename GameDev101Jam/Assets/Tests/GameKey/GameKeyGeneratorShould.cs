@@ -7,6 +7,7 @@ using UnityEngine.TestTools;
 using System;
 using System.Linq;
 using System.Text;
+using System.Collections.ObjectModel;
 
 namespace Tests
 {
@@ -68,31 +69,15 @@ namespace Tests
         }
 
         [Test]
-        public void ThrowExceptionIfNoConfigOnGetConfig()
-        {
-            IGameKeyGenerator sut = new GameKeyGenerator();
-
-            Assert.Throws<InvalidOperationException>(() => sut.GetConfig());
-        }
-
-        [Test]
-        public void ConfigNotNull()
-        {
-            IGameKeyGenerator sut = new GameKeyGenerator(minWithAConfig);
-
-            Assert.DoesNotThrow(() => sut.GetConfig());
-        }
-
-        [Test]
         public void SetConfigCorrectly()
         {
             IGameKeyGenerator sut1 = new GameKeyGenerator();
             IGameKeyGenerator sut2 = new GameKeyGenerator(minDefaultConfig);
 
-            sut1.SetConfig(minDefaultConfig);
+            sut1.Config = minDefaultConfig;
 
-            Assert.That(sut1.GetConfig(), Is.EqualTo(minDefaultConfig));
-            Assert.That(sut2.GetConfig(), Is.EqualTo(minDefaultConfig));
+            Assert.That(sut1.Config, Is.EqualTo(minDefaultConfig));
+            Assert.That(sut2.Config, Is.EqualTo(minDefaultConfig));
         }
 
         [Test]
@@ -102,9 +87,9 @@ namespace Tests
 
             IGameKey gameKey = sut.GenerateGameKey();
 
-            Assert.That(gameKey.GetPasswordString(), Is.EqualTo("a"));
-            Assert.That(gameKey.IsCracked(), Is.False);
-            Assert.That(gameKey.GetProgress(), Is.Zero);
+            Assert.That(gameKey.PasswordString, Is.EqualTo("a"));
+            Assert.That(gameKey.IsCracked, Is.False);
+            Assert.That(gameKey.Progress, Is.Zero);
         }
 
         [Test]
@@ -116,10 +101,10 @@ namespace Tests
 
             bool isFound = false;
             int index = 0;
-            while (!isFound && index > gameKey.GetPasswordString().Length)
+            while (!isFound && index > gameKey.PasswordString.Length)
             {
-                if (!minWithWildcardConfig.GetAllTokens().ToString()
-                    .Contains(gameKey.GetPasswordString()[index]))
+                if (!minWithWildcardConfig.AllTokens.ToString()
+                    .Contains(gameKey.PasswordString[index]))
                 {
                     isFound = true;
                 }
@@ -128,8 +113,8 @@ namespace Tests
             }
 
             Assert.That(isFound, Is.False);
-            Assert.That(gameKey.IsCracked(), Is.False);
-            Assert.That(gameKey.GetProgress(), Is.Zero);
+            Assert.That(gameKey.IsCracked, Is.False);
+            Assert.That(gameKey.Progress, Is.Zero);
         }
 
         class MockGameKeyGeneratorConfig : IGameKeyGeneratorConfig
@@ -152,50 +137,29 @@ namespace Tests
                 _wildcard = wildcard;
             }
 
-            public string[] GetAllTokens()
-            {
-                return _allTokens;
-            }
+            public float MinDifficulty => _minDiff;
+
+            public float MaxDifficulty => _maxDiff;
+
+            public IReadOnlyList<string> TokenArray => new ReadOnlyCollection<string>(_tokens);
+
+            public string WildCardToken => _wildcard;
+
+            public IReadOnlyList<string> AllTokens => new ReadOnlyCollection<string>(_allTokens);
+
+            public int MinLength => _minLen;
+
+            public int MaxLength => _maxLen;
 
             public string GetAllTokensAsString()
             {
                 StringBuilder sb = new StringBuilder();
-                foreach (var item in GetAllTokens())
+                foreach (var item in AllTokens)
                 {
                     sb.Append(item);
                 }
 
                 return sb.ToString();
-            }
-
-            public float GetMaxDifficulty()
-            {
-                return _maxDiff;
-            }
-
-            public int GetMaxLength()
-            {
-                return _maxLen;
-            }
-
-            public float GetMinDifficulty()
-            {
-                return _minDiff;
-            }
-
-            public int GetMinLength()
-            {
-                return _minLen;
-            }
-
-            public string[] GetTokenArray()
-            {
-                return _tokens;
-            }
-
-            public string GetWildCardToken()
-            {
-                return _wildcard;
             }
         }
 

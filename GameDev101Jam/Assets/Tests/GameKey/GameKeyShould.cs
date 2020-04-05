@@ -63,31 +63,31 @@ namespace Tests
             MockGameKeyPart[] mockGameKeyParts = new MockGameKeyPart[] { mockGameKeyPart };
             IGameKey sut = new GameKey(mockGameKeyParts);
 
-            Assert.That(fullString, Is.EqualTo(sut.GetPasswordString()));
+            Assert.That(fullString, Is.EqualTo(sut.PasswordString));
         }
 
         [Test]
         public void BeBrokenIfAllPartsBroken()
         {
-            GameKey sut = new GameKey(mockGameKeyPartsBroken);
+            IGameKey sut = new GameKey(mockGameKeyPartsBroken);
 
-            Assert.That(true, Is.EqualTo(sut.IsCracked()));
+            Assert.That(true, Is.EqualTo(sut.IsCracked));
         }
 
         [Test]
         public void BeNotBrokenIfSomePartsBroken()
         {
-            GameKey sut = new GameKey(mockGameKeyPartsSomeBroken);
+            IGameKey sut = new GameKey(mockGameKeyPartsSomeBroken);
 
-            Assert.That(false, Is.EqualTo(sut.IsCracked()));
+            Assert.That(false, Is.EqualTo(sut.IsCracked));
         }
 
         [Test]
         public void BeNotBrokenIfNoPartsBroken()
         {
-            GameKey sut = new GameKey(mockGameKeyPartsNoneBroken);
+            IGameKey sut = new GameKey(mockGameKeyPartsNoneBroken);
 
-            Assert.That(false, Is.EqualTo(sut.IsCracked()));
+            Assert.That(false, Is.EqualTo(sut.IsCracked));
         }
 
         [Test]
@@ -104,7 +104,7 @@ namespace Tests
             float actual = (90f + 50f + 1f + 0f) / 4f;
             GameKey sut = new GameKey(mockGameKeyPartsNoneBroken);
 
-            Assert.That(actual, Is.EqualTo(sut.GetProgress()));
+            Assert.That(actual, Is.EqualTo(sut.Progress));
         }
 
         [Test]
@@ -113,10 +113,10 @@ namespace Tests
             IGameKey sut = new GameKey(mockGameKeyPartsZero, 1f);
             sut.Crack(10f);
 
-            Assert.That(sut.GetProgress(), Is.Not.Zero);
-            Assert.That(sut.GetProgress(), Is.Not.Null);
-            Assert.That(sut.GetProgress(), Is.Not.NaN);
-            Assert.That(float.IsInfinity(sut.GetProgress()), Is.False);
+            Assert.That(sut.Progress, Is.Not.Zero);
+            Assert.That(sut.Progress, Is.Not.Null);
+            Assert.That(sut.Progress, Is.Not.NaN);
+            Assert.That(float.IsInfinity(sut.Progress), Is.False);
         }
 
         [Test]
@@ -130,24 +130,16 @@ namespace Tests
         {
             public string _theString;
             public float _theProgress = 0f;
+
+            public string KeyPartString => _theString;
+
+            public float Progress => _theProgress;
+
+            bool IGameKeyPart.IsBroken => _theProgress >= 100f;
+
             public float AddProgress(float progress)
             {
                 return _theProgress += progress;
-            }
-
-            public string GetKeyPartString()
-            {
-                return _theString;
-            }
-
-            public float GetProgress()
-            {
-                return _theProgress;
-            }
-
-            public bool IsBroken()
-            {
-                return _theProgress >= 100f;
             }
         }
 

@@ -15,18 +15,31 @@ namespace com.runtime.GameDev101Jam
         public GameKeyGenerator() { }
         public GameKeyGenerator(IGameKeyGeneratorConfig config)
         {
-            SetConfig(config);
+            Config = config;
+        }
+
+        public IGameKeyGeneratorConfig Config
+        {
+            get
+            {
+                if (_config == null)
+                {
+                    throw new InvalidOperationException("Config cannot be null");
+                }
+                return _config;
+            }
+            set => _config = value;
         }
 
         public IGameKey GenerateGameKey()
         {
-            IGameKeyGeneratorConfig config = GetConfig();
+            IGameKeyGeneratorConfig config = Config;
 
-            if (config.GetTokenArray().Length > 0)
+            if (config.TokenArray.Count > 0)
             {
-                for (int i = 0; i < config.GetTokenArray().Length; i++)
+                for (int i = 0; i < config.TokenArray.Count; i++)
                 {
-                    if (string.IsNullOrEmpty(config.GetTokenArray()[i]))
+                    if (string.IsNullOrEmpty(config.TokenArray[i]))
                     {
                         throw new InvalidOperationException("Empty spot in token array");
                     }
@@ -37,19 +50,19 @@ namespace com.runtime.GameDev101Jam
                 throw new InvalidOperationException("Token array cannot be zero length");
             }
 
-            int tokenLen = Random.Range(config.GetMinLength(), config.GetMaxLength() + 1);
+            int tokenLen = Random.Range(config.MinLength, config.MaxLength + 1);
             IGameKeyPart[] parts = new GameKeyPart[tokenLen];
-            string[] configTokens = config.GetTokenArray();
-            string[] allTokens = config.GetAllTokens();
+            IReadOnlyList<string> configTokens = config.TokenArray;
+            IReadOnlyList<string> allTokens = config.AllTokens;
 
             for (int i = 0; i < tokenLen; i++)
             {
 
-                int tokenIndex = Random.Range(0, configTokens.Length);
+                int tokenIndex = Random.Range(0, configTokens.Count);
                 string currToken = configTokens[tokenIndex];
-                if (currToken == config.GetWildCardToken())
+                if (currToken == config.WildCardToken)
                 {
-                    int allIndex = Random.Range(0, allTokens.Length);
+                    int allIndex = Random.Range(0, allTokens.Count);
                     parts[i] = new GameKeyPart(allTokens[allIndex]);
                 }
                 else
@@ -58,25 +71,11 @@ namespace com.runtime.GameDev101Jam
                 }
             }
 
-            float diff = Random.Range(config.GetMinDifficulty(), config.GetMaxDifficulty());
+            float diff = Random.Range(config.MinDifficulty, config.MaxDifficulty);
 
             IGameKey gameKey = new GameKey(parts, diff);
 
             return gameKey;
-        }
-
-        public IGameKeyGeneratorConfig GetConfig()
-        {
-            if (_config == null)
-            {
-                throw new InvalidOperationException("Config not set");
-            }
-            return _config;
-        }
-
-        public void SetConfig(IGameKeyGeneratorConfig config)
-        {
-            _config = config;
         }
     }
 }

@@ -31,8 +31,8 @@ namespace Tests
         {
             IGameKeyGeneratorConfig sut = new GameKeyGeneratorConfig(diff, diff, maxLen, minLen, tokens, wildcard);
 
-            Assert.That(sut.GetMaxDifficulty, Is.EqualTo(diff));
-            Assert.That(sut.GetMinDifficulty, Is.EqualTo(diff));
+            Assert.That(sut.MaxDifficulty, Is.EqualTo(diff));
+            Assert.That(sut.MinDifficulty, Is.EqualTo(diff));
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace Tests
         {
             IGameKeyGeneratorConfig sut = new GameKeyGeneratorConfig(maxDiff, minDiff, maxLen, minLen, tokens, wildcard);
 
-            Assert.That(sut.GetTokenArray(), Is.EqualTo(tokens));
+            Assert.That(sut.TokenArray, Is.EqualTo(tokens));
         }
 
         [Test]
@@ -66,7 +66,7 @@ namespace Tests
         {
             IGameKeyGeneratorConfig sut = new GameKeyGeneratorConfig(maxDiff, minDiff, maxLen, minLen, tokens, wildcard);
 
-            Assert.That(sut.GetWildCardToken(), Is.EqualTo(wildcard));
+            Assert.That(sut.WildCardToken, Is.EqualTo(wildcard));
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace Tests
         {
             IGameKeyGeneratorConfig sut = new GameKeyGeneratorConfig(maxDiff, minDiff, maxLen, minLen, tokens, wildcard);
 
-            Assert.That(sut.GetAllTokens()[item.Item2], Is.EqualTo(item.Item1));
+            Assert.That(sut.AllTokens[item.Item2], Is.EqualTo(item.Item1));
         }
 
         [Test]
@@ -97,8 +97,8 @@ namespace Tests
         {
             IGameKeyGeneratorConfig sut = new GameKeyGeneratorConfig(maxDiff, minDiff, len, len, tokens, wildcard);
 
-            Assert.That(sut.GetMaxLength, Is.EqualTo(len));
-            Assert.That(sut.GetMinLength, Is.EqualTo(len));
+            Assert.That(sut.MaxLength, Is.EqualTo(len));
+            Assert.That(sut.MinLength, Is.EqualTo(len));
         }
 
         [Test]

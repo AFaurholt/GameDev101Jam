@@ -22,7 +22,7 @@ namespace com.runtime.GameDev101Jam
         private Inventory _upgradeInventory;
         private Inventory _consumeableInventory;
 
-        private PasswordBreaker _passwordBreaker = new PasswordBreaker();
+        private PasswordBreakerLegacy _passwordBreaker = new PasswordBreakerLegacy();
         private List<PlayableNodeBehaviour> _portNodesBeingCracked = new List<PlayableNodeBehaviour>();
 
         // Start is called before the first frame update

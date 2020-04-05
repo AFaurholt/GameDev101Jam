@@ -8,9 +8,9 @@ namespace com.runtime.GameDev101Jam
 {
     public interface IGameKeyPart
     {
-        string GetKeyPartString();
-        bool IsBroken();
+        string KeyPartString { get; }
+        float Progress { get; }
+        bool IsBroken { get; }
         float AddProgress(float progress);
-        float GetProgress();
     }
 }

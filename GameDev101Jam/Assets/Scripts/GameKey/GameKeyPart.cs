@@ -11,29 +11,23 @@ namespace com.runtime.GameDev101Jam
         readonly string _actualString;
         float _breakProgress = 0f;
 
+        public string KeyPartString => _actualString;
+
+        public float Progress => _breakProgress;
+
         public GameKeyPart(string stringPart)
         {
             _actualString = stringPart;
         }
 
-        public string GetKeyPartString()
+        public bool IsBroken
         {
-            return _actualString;
-        }
-
-        public bool IsBroken()
-        {
-            return _breakProgress >= 100f;
+            get => _breakProgress >= 100f;
         }
 
         public float AddProgress(float progress)
         {
             return _breakProgress += progress;
-        }
-
-        public float GetProgress()
-        {
-            return _breakProgress;
         }
     }
 }

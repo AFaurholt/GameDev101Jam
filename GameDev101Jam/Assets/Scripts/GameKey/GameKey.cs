@@ -13,6 +13,37 @@ namespace com.runtime.GameDev101Jam
         readonly IGameKeyPart[] _gameKeyPartArray;
         readonly float _difficulty;
 
+        public float Progress
+        {
+            get
+            {
+                float progress = 0f;
+                foreach (var item in _gameKeyPartArray)
+                {
+                    progress += item.Progress;
+                }
+
+                progress /= _gameKeyPartArray.Length;
+                return progress;
+            }
+        }
+
+        string IGameKey.PasswordString
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (var item in _gameKeyPartArray)
+                {
+                    sb.Append(item.KeyPartString);
+                }
+
+                return sb.ToString();
+            }
+        }
+
+        bool IGameKey.IsCracked => Progress >= 100f;
+
         public GameKey(IGameKeyPart[] passwordParts)
         {
             _gameKeyPartArray = passwordParts;
@@ -41,34 +72,6 @@ namespace com.runtime.GameDev101Jam
                 throw new InvalidOperationException("Difficulty is less than 0 or uninitialised");
             }
 
-        }
-
-        public string GetPasswordString()
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach (var item in _gameKeyPartArray)
-            {
-                sb.Append(item.GetKeyPartString());
-            }
-
-            return sb.ToString();
-        }
-
-        public float GetProgress()
-        {
-            float progress = 0f;
-            foreach (var item in _gameKeyPartArray)
-            {
-                progress += item.GetProgress();
-            }
-
-            progress /= _gameKeyPartArray.Length;
-            return progress;
-        }
-
-        public bool IsCracked()
-        {
-            return GetProgress() >= 100f;
         }
     }
 }

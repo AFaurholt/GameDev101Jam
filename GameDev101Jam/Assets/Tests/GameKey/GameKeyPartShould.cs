@@ -15,7 +15,7 @@ namespace Tests
         {
             IGameKeyPart sut = new GameKeyPart(stringPart);
 
-            Assert.That(stringPart, Is.EqualTo(sut.GetKeyPartString()));
+            Assert.That(stringPart, Is.EqualTo(sut.KeyPartString));
         }
 
         [Test]
@@ -24,7 +24,7 @@ namespace Tests
             IGameKeyPart sut = new GameKeyPart("whatever");
             sut.AddProgress(100f);
 
-            Assert.That(true, Is.EqualTo(sut.IsBroken()));
+            Assert.That(true, Is.EqualTo(sut.IsBroken));
         }
 
         [Test]
@@ -33,7 +33,7 @@ namespace Tests
             IGameKeyPart sut = new GameKeyPart("whatever");
             sut.AddProgress(val);
 
-            Assert.That(val, Is.EqualTo(sut.GetProgress()));
+            Assert.That(val, Is.EqualTo(sut.Progress));
         }
 
        

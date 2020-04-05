@@ -8,8 +8,7 @@ namespace com.runtime.GameDev101Jam
 {
     public interface IGameKeyGenerator
     {
-        void SetConfig(IGameKeyGeneratorConfig config);
-        IGameKeyGeneratorConfig GetConfig();
+        IGameKeyGeneratorConfig Config { get; set; }
         IGameKey GenerateGameKey();
     }
 }

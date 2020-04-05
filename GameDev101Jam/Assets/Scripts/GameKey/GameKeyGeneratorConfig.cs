@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace com.runtime.GameDev101Jam
@@ -50,50 +52,23 @@ namespace com.runtime.GameDev101Jam
             _wildcard = wildcard;
         }
 
-        public string[] GetAllTokens()
-        {
-            return _allTokens;
-        }
+        public float MinDifficulty { get => _minDiff; }
+        public float MaxDifficulty { get => _maxDiff; }
+        public IReadOnlyList<string> TokenArray { get => new ReadOnlyCollection<string>(_tokens); }
+        public string WildCardToken { get => _wildcard; }
+        public IReadOnlyList<string> AllTokens { get => new ReadOnlyCollection<string>(_allTokens); }
+        public int MinLength { get => _minLen; }
+        public int MaxLength { get => _maxLen; }
 
         public string GetAllTokensAsString()
         {
             StringBuilder sb = new StringBuilder();
-            foreach (var item in GetAllTokens())
+            foreach (var item in AllTokens)
             {
                 sb.Append(item);
             }
 
             return sb.ToString();
-        }
-
-        public float GetMaxDifficulty()
-        {
-            return _maxDiff;
-        }
-
-        public int GetMaxLength()
-        {
-            return _maxLen;
-        }
-
-        public float GetMinDifficulty()
-        {
-            return _minDiff;
-        }
-
-        public int GetMinLength()
-        {
-            return _minLen;
-        }
-
-        public string[] GetTokenArray()
-        {
-            return _tokens;
-        }
-
-        public string GetWildCardToken()
-        {
-            return _wildcard;
         }
     }
 }

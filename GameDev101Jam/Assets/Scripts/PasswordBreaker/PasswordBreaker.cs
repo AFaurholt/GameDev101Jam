@@ -1,25 +1,39 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnityEngine;
 
 namespace com.runtime.GameDev101Jam
 {
-    class PasswordBreaker
+    public class PasswordBreaker : IPasswordBreaker
     {
-        public void CrackPassword(ref PlayablePassword playablePassword, float cpuStrength, Inventory upgradeInventory)
+        public HashSet<IGameKey> BreakList { get; } = new HashSet<IGameKey>();
+
+        public void AddToBreakList(IGameKey gameKey)
         {
-            Dictionary<int, float> newProgress = new Dictionary<int, float>();
-            foreach (KeyValuePair<int, float> item in playablePassword.CurrentProgress)
+            BreakList.Add(gameKey);
+        }
+
+        public void AddToBreakList(params IGameKey[] gameKeys)
+        {
+            foreach (var item in gameKeys)
             {
-                if (!(item.Value >= 100f))
-                {
-                    float increment = Random.Range(cpuStrength / playablePassword.Difficulty, cpuStrength);
-                    newProgress.Add(item.Key, playablePassword.CurrentProgress[item.Key] + increment / playablePassword.Difficulty);
-                }
+                AddToBreakList(item);
             }
-            playablePassword.CurrentProgress = newProgress;
+        }
+
+        public void Crack(float power)
+        {
+            foreach (var item in BreakList)
+            {
+                item.Crack(power);
+            }
+        }
+
+        public void RemoveFromBreakList(IGameKey gameKey)
+        {
+            BreakList.Remove(gameKey);
         }
     }
 }
