@@ -13,11 +13,18 @@ namespace Tests
         [Test]
         public void GetCores()
         {
+
+
             IGameCpu gameCpu1 = new MockGameCpu();
             IGameCpu gameCpu2 = new MockGameCpu();
             IGameCpuChip sut = new GameCpuChip(gameCpu1, gameCpu2);
-
+            List<IGameCpu> gameCpus = new List<IGameCpu> {
+                gameCpu1,
+                gameCpu2
+            };
+            IGameCpuChip sut2 = new GameCpuChip(gameCpus);
             Assert.That(sut.Cores, Is.EqualTo(new List<IGameCpu>() { gameCpu1, gameCpu2 }));
+            Assert.That(sut2.Cores, Is.EqualTo(new List<IGameCpu>() { gameCpu1, gameCpu2 }));
         }
 
         private class MockGameCpu : IGameCpu

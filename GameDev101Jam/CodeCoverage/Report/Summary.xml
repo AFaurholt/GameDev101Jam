@@ -1,25 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CoverageReport scope="Summary">
   <Summary>
-    <Generatedon>07/04/2020 - 02:03:58</Generatedon>
-    <Parser>MultiReportParser (29x CoberturaParser, 1x OpenCoverParser)</Parser>
+    <Generatedon>07/04/2020 - 02:07:51</Generatedon>
+    <Parser>MultiReportParser (30x CoberturaParser, 1x OpenCoverParser)</Parser>
     <Assemblies>1</Assemblies>
     <Classes>25</Classes>
     <Files>25</Files>
-    <Coveredlines>270</Coveredlines>
-    <Uncoveredlines>276</Uncoveredlines>
+    <Coveredlines>274</Coveredlines>
+    <Uncoveredlines>272</Uncoveredlines>
     <Coverablelines>546</Coverablelines>
     <Totallines>1150</Totallines>
-    <Linecoverage>49.4</Linecoverage>
+    <Linecoverage>50.1</Linecoverage>
     <Coveredbranches>0</Coveredbranches>
     <Totalbranches>0</Totalbranches>
   </Summary>
   <Coverage>
-    <Assembly name="HackingGame" classes="25" coverage="49.4" coveredlines="270" coverablelines="546" totallines="1150" branchcoverage="" coveredbranches="0" totalbranches="0">
+    <Assembly name="HackingGame" classes="25" coverage="50.1" coveredlines="274" coverablelines="546" totallines="1150" branchcoverage="" coveredbranches="0" totalbranches="0">
       <Class name="com.runtime.GameDev101Jam.ConnectLineBehaviour" coverage="0" coveredlines="0" coverablelines="13" totallines="28" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="com.runtime.GameDev101Jam.DictionaryExtensions" coverage="100" coveredlines="11" coverablelines="11" totallines="26" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="com.runtime.GameDev101Jam.GameCpu" coverage="100" coveredlines="91" coverablelines="91" totallines="139" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="com.runtime.GameDev101Jam.GameCpuChip" coverage="66.6" coveredlines="8" coverablelines="12" totallines="24" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.GameCpuChip" coverage="100" coveredlines="12" coverablelines="12" totallines="24" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="com.runtime.GameDev101Jam.GameKey" coverage="100" coveredlines="39" coverablelines="39" totallines="77" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="com.runtime.GameDev101Jam.GameKeyGenerator" coverage="100" coveredlines="46" coverablelines="46" totallines="81" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="com.runtime.GameDev101Jam.GameKeyGeneratorConfig" coverage="100" coveredlines="45" coverablelines="45" totallines="74" branchcoverage="" coveredbranches="0" totalbranches="0" />
