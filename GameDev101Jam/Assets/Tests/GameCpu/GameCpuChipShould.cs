@@ -13,8 +13,6 @@ namespace Tests
         [Test]
         public void GetCores()
         {
-
-
             IGameCpu gameCpu1 = new MockGameCpu();
             IGameCpu gameCpu2 = new MockGameCpu();
             IGameCpuChip sut = new GameCpuChip(gameCpu1, gameCpu2);
