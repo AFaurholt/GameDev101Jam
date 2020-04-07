@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace com.runtime.GameDev101Jam
 {
-    public interface IGameCpuChip
+    public interface IGameCpuProcess
     {
-        List<IGameCpu> Cores { get; }
+        float Size { get; }
+        void Execute(float power);
     }
 }
