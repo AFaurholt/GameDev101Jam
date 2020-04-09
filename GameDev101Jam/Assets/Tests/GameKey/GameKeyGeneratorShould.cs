@@ -25,12 +25,12 @@ namespace Tests
         private readonly string[] tokensWildcard = new string[] { "**" };
         readonly string defaultWildcard = "**";
 
-        MockGameKeyGeneratorConfig minDefaultConfig, minWithEmptyNullSpotsConfig, minWithEmptySpotsConfig, minWithNullSpotsConfig, minWithAConfig, minWithWildcardConfig;
+        MockGameKeyGeneratorConfig minEmptyConfig, minWithEmptyNullSpotsConfig, minWithEmptySpotsConfig, minWithNullSpotsConfig, minWithAConfig, minWithWildcardConfig;
 
         [SetUp]
         public void SetUp()
         {
-            minDefaultConfig = new MockGameKeyGeneratorConfig(maxDiff1, minDiff1, maxLen1, minLen1, tokensEmpty, defaultWildcard);
+            minEmptyConfig = new MockGameKeyGeneratorConfig(maxDiff1, minDiff1, maxLen1, minLen1, tokensEmpty, defaultWildcard);
             minWithEmptyNullSpotsConfig = new MockGameKeyGeneratorConfig(maxDiff1, minDiff1, maxLen1, minLen1, tokensEmptyNullSpot, defaultWildcard);
 
             minWithEmptySpotsConfig = new MockGameKeyGeneratorConfig(maxDiff1, minDiff1, maxLen1, minLen1, tokensEmptySpot, defaultWildcard);
@@ -40,44 +40,36 @@ namespace Tests
             minWithWildcardConfig = new MockGameKeyGeneratorConfig(maxDiff1, minDiff1, maxLen1, minLen1, tokensWildcard, defaultWildcard);
         }
 
-        // A Test behaves as an ordinary method
         [Test]
-        public void ThrowExceptionIfNoConfigOnGenerate()
+        public void ThrowExceptionIfConfigTokensEmptyOnSet()
         {
-            IGameKeyGenerator sut = new GameKeyGenerator();
-            Assert.Throws<InvalidOperationException>(() => sut.GenerateGameKey());
+            IGameKeyGenerator sut = new GameKeyGenerator(minWithAConfig);
+
+            Assert.Throws<InvalidOperationException>(() => sut.Config = minEmptyConfig);
         }
 
         [Test]
-        public void ThrowExceptionIfConfigTokensEmptyOnGenerate()
+        public void ThrowExceptionIfConfigTokensEmptySpotOnSet()
         {
-            IGameKeyGenerator sut = new GameKeyGenerator(minDefaultConfig);
+            IGameKeyGenerator sut1 = new GameKeyGenerator(minWithAConfig);
+            IGameKeyGenerator sut2 = new GameKeyGenerator(minWithAConfig);
+            IGameKeyGenerator sut3 = new GameKeyGenerator(minWithAConfig);
 
-            Assert.Throws<InvalidOperationException>(() => sut.GenerateGameKey());
-        }
-
-        [Test]
-        public void ThrowExceptionIfConfigTokensEmptySpotOnGenerate()
-        {
-            IGameKeyGenerator sut1 = new GameKeyGenerator(minWithEmptyNullSpotsConfig);
-            IGameKeyGenerator sut2 = new GameKeyGenerator(minWithEmptySpotsConfig);
-            IGameKeyGenerator sut3 = new GameKeyGenerator(minWithNullSpotsConfig);
-
-            Assert.Throws<InvalidOperationException>(() => sut1.GenerateGameKey());
-            Assert.Throws<InvalidOperationException>(() => sut2.GenerateGameKey());
-            Assert.Throws<InvalidOperationException>(() => sut3.GenerateGameKey());
+            Assert.Throws<InvalidOperationException>(() => sut1.Config = minWithEmptyNullSpotsConfig);
+            Assert.Throws<InvalidOperationException>(() => sut2.Config = minWithEmptySpotsConfig);
+            Assert.Throws<InvalidOperationException>(() => sut3.Config = minWithNullSpotsConfig);
         }
 
         [Test]
         public void SetConfigCorrectly()
         {
-            IGameKeyGenerator sut1 = new GameKeyGenerator();
-            IGameKeyGenerator sut2 = new GameKeyGenerator(minDefaultConfig);
+            IGameKeyGenerator sut1 = new GameKeyGenerator(new MockGameKeyGeneratorConfig(minWithAConfig));
+            IGameKeyGenerator sut2 = new GameKeyGenerator(minWithAConfig);
 
-            sut1.Config = minDefaultConfig;
+            sut1.Config = minWithAConfig;
 
-            Assert.That(sut1.Config, Is.EqualTo(minDefaultConfig));
-            Assert.That(sut2.Config, Is.EqualTo(minDefaultConfig));
+            Assert.That(sut1.Config, Is.EqualTo(minWithAConfig));
+            Assert.That(sut2.Config, Is.EqualTo(minWithAConfig));
         }
 
         [Test]
@@ -126,7 +118,7 @@ namespace Tests
             readonly string[] _tokens;
             readonly string _wildcard;
             readonly string[] _allTokens = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "y", "x", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "Y", "X", "Z" };
-
+            
             public MockGameKeyGeneratorConfig(float maxDiff, float minDiff, int maxLen, int minLen, string[] tokens, string wildcard)
             {
                 _maxDiff = maxDiff;
@@ -136,6 +128,10 @@ namespace Tests
                 _tokens = tokens;
                 _wildcard = wildcard;
             }
+
+            public MockGameKeyGeneratorConfig(IGameKeyGeneratorConfig config) :
+                this(config.MaxDifficulty, config.MinDifficulty, config.MaxLength, config.MinLength,
+                config.TokenArray.ToArray(), config.WildCardToken) { }
 
             public float MinDifficulty => _minDiff;
 

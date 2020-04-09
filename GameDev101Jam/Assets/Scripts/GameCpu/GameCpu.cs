@@ -8,30 +8,31 @@ namespace com.runtime.GameDev101Jam
 {
     public class GameCpu : IGameCpu
     {
-        private Dictionary<IGameCpuProcess, float> _cpuAllocations = new Dictionary<IGameCpuProcess, float>();
-
         public GameCpu(float power, float maxCapacity)
         {
             Power = power;
             MaxCapacity = maxCapacity;
         }
+        public GameCpu(float power, float maxCapacity, float hrtz) : this(power, maxCapacity)
+        {
+            Hrtz = hrtz;
+        }
+
         public float Power { get; }
-
         public float MaxCapacity { get; }
-
-        public Dictionary<IGameCpuProcess, float> CpuAllocations => _cpuAllocations;
-
-        public float CurrentCapacity => CpuAllocations.Keys.Sum(x => x.Size);
+        public IDictionary<IGameCpuProcess, float> CpuAllocations { get; private set; } = new Dictionary<IGameCpuProcess, float>();
+        public float CurrentCapacity => CpuAllocations.Keys.Sum(x => x.ProcessCost);
+        public float Hrtz { get; }
 
         public bool AddAllocation(IGameCpuProcess gameCpuProcess, float percentageAllocated)
         {
             float currentCap = 0f;
             foreach (var item in CpuAllocations)
             {
-                currentCap += item.Key.Size;
+                currentCap += item.Key.ProcessCost;
             }
 
-            if (MaxCapacity < currentCap + gameCpuProcess.Size)
+            if (MaxCapacity < currentCap + gameCpuProcess.ProcessCost)
             {
                 return false;
             }
@@ -50,9 +51,9 @@ namespace com.runtime.GameDev101Jam
                 return true;
             }
         }
-        public bool CombineAllocation(Dictionary<IGameCpuProcess, float> allocations)
+        public bool CombineAllocation(IDictionary<IGameCpuProcess, float> allocations)
         {
-            float targetSize = allocations.Keys.Sum(x => x.Size);
+            float targetSize = allocations.Keys.Sum(x => x.ProcessCost);
             if (MaxCapacity < (CurrentCapacity + targetSize))
             {
                 return false;
@@ -61,9 +62,9 @@ namespace com.runtime.GameDev101Jam
             {
                 if (CpuAllocations.Count > 0)
                 {
-                    Dictionary<IGameCpuProcess, float> newDicCurrent = 
+                    IDictionary<IGameCpuProcess, float> newDicCurrent =
                         new Dictionary<IGameCpuProcess, float>();
-                    Dictionary<IGameCpuProcess, float> newDicCombine = 
+                    IDictionary<IGameCpuProcess, float> newDicCombine =
                         new Dictionary<IGameCpuProcess, float>();
 
                     foreach (var item in CpuAllocations)
@@ -76,27 +77,35 @@ namespace com.runtime.GameDev101Jam
                         float tmp = item.Value * (CpuAllocations.Values.Sum() / 2);
                         newDicCombine.Add(item.Key, tmp);
                     }
-                    _cpuAllocations = newDicCurrent.Combine(newDicCombine);
+                    CpuAllocations = newDicCurrent.Concat(newDicCombine);
                 }
                 else
                 {
-                    _cpuAllocations = allocations;
+                    CpuAllocations = allocations;
                 }
                 return true;
             }
         }
-
         public bool ChangeAllocationPercentage(IGameCpuProcess gameCpuProcess, float value)
         {
+            bool result = false;
             if (CpuAllocations.ContainsKey(gameCpuProcess))
             {
                 ChangeAllAllocationsToFitNewValue(gameCpuProcess, value, CpuAllocations[gameCpuProcess]);
-                return true;
+                result = true;
             }
-            else
-            {
-                return false;
-            }
+
+            return result;
+        }
+        public float GetPowerForProcess(IGameCpuProcess gameCpuProcess)
+        {
+            return CpuAllocations[gameCpuProcess] * Power;
+        }
+        public void RemoveAllocation(IGameCpuProcess gameCpuProcess)
+        {
+            float percentage = CpuAllocations[gameCpuProcess];
+            CpuAllocations.Remove(gameCpuProcess);
+            ChangeAllAllocationsToFitNewValue(null, 0, percentage);
         }
 
         private void ChangeAllAllocationsToFitNewValue(IGameCpuProcess gameCpuProcessToFit, float newValue, float oldValue)
@@ -116,24 +125,11 @@ namespace com.runtime.GameDev101Jam
                 }
             }
 
-            _cpuAllocations = newDic;
+            CpuAllocations = newDic;
         }
-
         private float ModifyPercentageEvenlyToFitChange(float changeTarget, float oldValue, float newValue)
         {
             return changeTarget * (1 + ((oldValue - newValue) / (1 - oldValue)));
-        }
-
-        public float GetPowerForProcess(IGameCpuProcess gameCpuProcess)
-        {
-            return CpuAllocations[gameCpuProcess] * Power;
-        }
-
-        public void RemoveAllocation(IGameCpuProcess gameCpuProcess)
-        {
-            float percentage = CpuAllocations[gameCpuProcess];
-            CpuAllocations.Remove(gameCpuProcess);
-            ChangeAllAllocationsToFitNewValue(null, 0, percentage);
         }
     }
 }

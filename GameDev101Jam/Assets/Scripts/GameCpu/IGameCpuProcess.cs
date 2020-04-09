@@ -6,9 +6,5 @@ using System.Threading.Tasks;
 
 namespace com.runtime.GameDev101Jam
 {
-    public interface IGameCpuProcess
-    {
-        float Size { get; }
-        void Execute(float power);
-    }
+    public interface IGameCpuProcess : IGameProcess<IGameCpu> { }
 }

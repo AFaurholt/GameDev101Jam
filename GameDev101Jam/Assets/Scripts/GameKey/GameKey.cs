@@ -13,6 +13,13 @@ namespace com.runtime.GameDev101Jam
         readonly IGameKeyPart[] _gameKeyPartArray;
         readonly float _difficulty;
 
+        public GameKey(IGameKeyPart[] passwordParts, float difficulty)
+        {
+            CheckDifficultyError(difficulty);
+            _difficulty = difficulty;
+            _gameKeyPartArray = passwordParts;
+        }
+
         public float Progress
         {
             get
@@ -28,7 +35,7 @@ namespace com.runtime.GameDev101Jam
             }
         }
 
-        string IGameKey.PasswordString
+        public string PasswordString
         {
             get
             {
@@ -42,36 +49,26 @@ namespace com.runtime.GameDev101Jam
             }
         }
 
-        bool IGameKey.IsCracked => Progress >= 100f;
-
-        public GameKey(IGameKeyPart[] passwordParts)
-        {
-            _gameKeyPartArray = passwordParts;
-        }
-
-        public GameKey(IGameKeyPart[] passwordParts, float difficulty) : this(passwordParts)
-        {
-            _difficulty = difficulty;
-        }
+        public bool IsCracked => Progress >= 100f;
 
         public void Crack(float power)
         {
-            if (_difficulty > 0)
+            for (int i = 0; i < _gameKeyPartArray.Length; i++)
             {
-
-
-                for (int i = 0; i < _gameKeyPartArray.Length; i++)
-                {
-                    float progress = Random.Range(power / _difficulty, power);
-                    progress /= _difficulty;
-                    _gameKeyPartArray[i].AddProgress(progress);
-                }
+                _gameKeyPartArray[i].AddProgress(GenerateProgress(power));
             }
-            else
+        }
+
+        private float GenerateProgress(float power)
+        {
+            return Random.Range(power / _difficulty, power) / _difficulty;
+        }
+        private void CheckDifficultyError(float difficulty)
+        {
+            if (difficulty <= 0)
             {
                 throw new InvalidOperationException("Difficulty is less than 0 or uninitialised");
             }
-
         }
     }
 }

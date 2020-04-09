@@ -11,71 +11,101 @@ namespace com.runtime.GameDev101Jam
     public class GameKeyGenerator : IGameKeyGenerator
     {
         IGameKeyGeneratorConfig _config;
-
-        public GameKeyGenerator() { }
         public GameKeyGenerator(IGameKeyGeneratorConfig config)
         {
-            Config = config;
+            Config = config ?? throw new InvalidOperationException("Config cannot be null");
         }
-
         public IGameKeyGeneratorConfig Config
         {
-            get
+            get { return _config; }
+            set
             {
-                if (_config == null)
-                {
-                    throw new InvalidOperationException("Config cannot be null");
-                }
-                return _config;
+                CheckForConfigErrors(value);
+                _config = value;
             }
-            set => _config = value;
         }
 
         public IGameKey GenerateGameKey()
         {
-            IGameKeyGeneratorConfig config = Config;
+            IGameKeyPart[] parts = GenerateGameKeyPartsArray(GenerateLength());
 
-            if (config.TokenArray.Count > 0)
+            return new GameKey(parts, GenerateDifficulty());
+        }
+
+        private void FillGameKeyPartArrayAtIndex(ref IGameKeyPart[] gameKeyParts, int index)
+        {
+            string currToken = GenerateToken();
+            gameKeyParts[index] = GenerateKeyPart(currToken);
+        }
+        private void FillGameKeyPartArray(out IGameKeyPart[] gameKeyParts, int length)
+        {
+            gameKeyParts = new GameKeyPart[length];
+
+            for (int i = 0; i < length; i++)
             {
-                for (int i = 0; i < config.TokenArray.Count; i++)
-                {
-                    if (string.IsNullOrEmpty(config.TokenArray[i]))
-                    {
-                        throw new InvalidOperationException("Empty spot in token array");
-                    }
-                }
+                FillGameKeyPartArrayAtIndex(ref gameKeyParts, i);
             }
-            else
+        }
+        private IGameKeyPart[] GenerateGameKeyPartsArray(int length)
+        {
+            FillGameKeyPartArray(out IGameKeyPart[] parts, length);
+
+            return parts;
+        }
+        private IGameKeyPart GenerateKeyPart(string token)
+        {
+            return new GameKeyPart(TokenOrAllToken(token));
+        }
+        private string TokenOrAllToken(string token)
+        {
+            return IsTokenWildCard(token) ? Config.AllTokens[GenerateAllTokenIndex()] : token;
+        }
+        private int GenerateAllTokenIndex()
+        {
+            return Random.Range(0, Config.AllTokens.Count);
+        }
+        private bool IsTokenWildCard(string token)
+        {
+            return token == Config.WildCardToken;
+        }
+        private string GenerateToken()
+        {
+            int tokenIndex = Random.Range(0, Config.TokenArray.Count);
+            return Config.TokenArray[tokenIndex];
+        }
+        private int GenerateLength()
+        {
+            return Random.Range(Config.MinLength, Config.MaxLength + 1);
+        }
+        private float GenerateDifficulty()
+        {
+            return Random.Range(Config.MinDifficulty, Config.MaxDifficulty);
+        }
+        private void CheckForConfigErrors(IGameKeyGeneratorConfig config)
+        {
+            CheckConfigTokenArrayNotEmpty(config);
+            CheckConfigTokenArrayHasNoEmptySpots(config);
+        }
+        private void CheckConfigTokenArrayHasNoEmptySpots(IGameKeyGeneratorConfig config)
+        {
+            for (int i = 0; i < config.TokenArray.Count; i++)
+            {
+                CheckIsNullOrEmptyAtTokenArrayIndex(config, i);
+            }
+        }
+        private void CheckIsNullOrEmptyAtTokenArrayIndex(IGameKeyGeneratorConfig config, int index)
+        {
+            if (string.IsNullOrEmpty(config.TokenArray[index]))
+            {
+                throw new InvalidOperationException("Empty spot in token array");
+            }
+        }
+        private void CheckConfigTokenArrayNotEmpty(IGameKeyGeneratorConfig config)
+        {
+            if (!(config.TokenArray.Count > 0))
             {
                 throw new InvalidOperationException("Token array cannot be zero length");
             }
-
-            int tokenLen = Random.Range(config.MinLength, config.MaxLength + 1);
-            IGameKeyPart[] parts = new GameKeyPart[tokenLen];
-            IReadOnlyList<string> configTokens = config.TokenArray;
-            IReadOnlyList<string> allTokens = config.AllTokens;
-
-            for (int i = 0; i < tokenLen; i++)
-            {
-
-                int tokenIndex = Random.Range(0, configTokens.Count);
-                string currToken = configTokens[tokenIndex];
-                if (currToken == config.WildCardToken)
-                {
-                    int allIndex = Random.Range(0, allTokens.Count);
-                    parts[i] = new GameKeyPart(allTokens[allIndex]);
-                }
-                else
-                {
-                    parts[i] = new GameKeyPart(currToken);
-                }
-            }
-
-            float diff = Random.Range(config.MinDifficulty, config.MaxDifficulty);
-
-            IGameKey gameKey = new GameKey(parts, diff);
-
-            return gameKey;
         }
     }
 }

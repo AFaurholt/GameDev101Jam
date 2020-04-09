@@ -118,8 +118,8 @@ namespace Tests
                 copy2.Add(item, 0.1f);
             }
 
-            Dictionary<IGameCpuProcess, float> expected = copy1;
-            expected.Combine(copy2);
+            IDictionary<IGameCpuProcess, float> expected = copy1;
+            expected.Concat(copy2);
 
             Assert.That(gameCpu.CpuAllocations, Is.EqualTo(expected));
         }
@@ -206,17 +206,40 @@ namespace Tests
             }
         }
 
+        [Test]
+        public void GetHrtz([Values(0f, 1f, float.MaxValue)]float hrtz)
+        {
+            IGameCpu gameCpu = new GameCpu(100f, 100f, hrtz);
+
+            Assert.That(gameCpu.Hrtz, Is.EqualTo(hrtz));
+        }
+
         private class MockCpuProcess : IGameCpuProcess
         {
             public MockCpuProcess(float size)
             {
-                Size = size;
+                ProcessCost = size;
             }
 
-            public float Size { get; }
+            public float ProcessCost { get; }
+
+            public IGameCpu Handler => throw new NotImplementedException();
+
+            public bool IsRunning => throw new NotImplementedException();
+
             public void Execute(float power)
             {
                 throw new System.NotImplementedException();
+            }
+
+            public void Pause()
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Start()
+            {
+                throw new NotImplementedException();
             }
         }
         // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use

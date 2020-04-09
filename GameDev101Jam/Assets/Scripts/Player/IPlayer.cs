@@ -8,6 +8,11 @@ namespace com.runtime.GameDev101Jam
 {
     public interface IPlayer
     {
-
+        float TraceCurrent { get; set; }
+        float TraceMax { get; set; }
+        List<IGameCpuChip> AllInstalledChips { get; }
+        List<IGameCpu> AllCores { get; }
+        List<IGameCpuProcess> AllGameCpuProcesses { get; }
+        void UpdateAllRunningProcesses(float deltaTime);
     }
 }

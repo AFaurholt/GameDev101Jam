@@ -11,9 +11,10 @@ namespace com.runtime.GameDev101Jam
         float Power { get; }
         float MaxCapacity { get; }
         float CurrentCapacity { get; }
-        Dictionary<IGameCpuProcess, float> CpuAllocations { get; }
+        float Hrtz { get; }
+        IDictionary<IGameCpuProcess, float> CpuAllocations { get; }
         bool AddAllocation(IGameCpuProcess gameCpuProcess, float percentageAllocated);
-        bool CombineAllocation(Dictionary<IGameCpuProcess, float> allocations);
+        bool CombineAllocation(IDictionary<IGameCpuProcess, float> allocations);
         void RemoveAllocation(IGameCpuProcess gameCpuProcess);
         float GetPowerForProcess(IGameCpuProcess gameCpuProcess);
         bool ChangeAllocationPercentage(IGameCpuProcess gameCpuProcess, float value);

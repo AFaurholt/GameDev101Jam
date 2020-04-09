@@ -31,16 +31,13 @@ namespace Tests
 
             public float MaxCapacity => throw new System.NotImplementedException();
 
-            public Dictionary<IGameCpuProcess, float> CpuAllocations => throw new System.NotImplementedException();
+            public IDictionary<IGameCpuProcess, float> CpuAllocations => throw new System.NotImplementedException();
 
             public float CurrentCapacity => throw new System.NotImplementedException();
 
-            public bool AddAllocation(IGameCpuProcess gameCpuProcess, float percentageAllocated)
-            {
-                throw new System.NotImplementedException();
-            }
+            public float Hrtz => throw new System.NotImplementedException();
 
-            public void ChangeAllocation(IGameCpuProcess gameCpuProcess, float percentageChange)
+            public bool AddAllocation(IGameCpuProcess gameCpuProcess, float percentageAllocated)
             {
                 throw new System.NotImplementedException();
             }
@@ -50,7 +47,7 @@ namespace Tests
                 throw new System.NotImplementedException();
             }
 
-            public bool CombineAllocation(Dictionary<IGameCpuProcess, float> allocations)
+            public bool CombineAllocation(IDictionary<IGameCpuProcess, float> allocations)
             {
                 throw new System.NotImplementedException();
             }

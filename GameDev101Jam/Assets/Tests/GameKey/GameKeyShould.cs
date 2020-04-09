@@ -61,7 +61,7 @@ namespace Tests
                 _theString = fullString
             };
             MockGameKeyPart[] mockGameKeyParts = new MockGameKeyPart[] { mockGameKeyPart };
-            IGameKey sut = new GameKey(mockGameKeyParts);
+            IGameKey sut = new GameKey(mockGameKeyParts, 1f);
 
             Assert.That(fullString, Is.EqualTo(sut.PasswordString));
         }
@@ -69,7 +69,7 @@ namespace Tests
         [Test]
         public void BeBrokenIfAllPartsBroken()
         {
-            IGameKey sut = new GameKey(mockGameKeyPartsBroken);
+            IGameKey sut = new GameKey(mockGameKeyPartsBroken, 1f);
 
             Assert.That(true, Is.EqualTo(sut.IsCracked));
         }
@@ -77,7 +77,7 @@ namespace Tests
         [Test]
         public void BeNotBrokenIfSomePartsBroken()
         {
-            IGameKey sut = new GameKey(mockGameKeyPartsSomeBroken);
+            IGameKey sut = new GameKey(mockGameKeyPartsSomeBroken, 1f);
 
             Assert.That(false, Is.EqualTo(sut.IsCracked));
         }
@@ -85,7 +85,7 @@ namespace Tests
         [Test]
         public void BeNotBrokenIfNoPartsBroken()
         {
-            IGameKey sut = new GameKey(mockGameKeyPartsNoneBroken);
+            IGameKey sut = new GameKey(mockGameKeyPartsNoneBroken, 1f);
 
             Assert.That(false, Is.EqualTo(sut.IsCracked));
         }
@@ -102,7 +102,7 @@ namespace Tests
               };
 
             float actual = (90f + 50f + 1f + 0f) / 4f;
-            GameKey sut = new GameKey(mockGameKeyPartsNoneBroken);
+            GameKey sut = new GameKey(mockGameKeyPartsNoneBroken, 1f);
 
             Assert.That(actual, Is.EqualTo(sut.Progress));
         }
@@ -120,10 +120,9 @@ namespace Tests
         }
 
         [Test]
-        public void CrackException()
+        public void ThrowExceptionOnInvalidDifficulty([Values(0f, -1f)]float diff)
         {
-            IGameKey sut = new GameKey(mockGameKeyPartsZero);
-            Assert.Throws<InvalidOperationException>(() => sut.Crack(10));
+            Assert.Throws<InvalidOperationException>(() => new GameKey(mockGameKeyPartsZero, diff));
         }
 
         class MockGameKeyPart : IGameKeyPart

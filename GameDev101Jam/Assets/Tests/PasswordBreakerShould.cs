@@ -12,7 +12,7 @@ namespace Tests
         [Test]
         public void AddToBreakList()
         {
-            IPasswordBreaker sut1 = new PasswordBreaker();
+            IPasswordBreaker sut1 = new PasswordBreaker(100f);
             IGameKey gameKey = new MockGameKey();
 
             sut1.AddToBreakList(gameKey);
@@ -23,7 +23,7 @@ namespace Tests
         [Test]
         public void NoDuplicateAdd()
         {
-            IPasswordBreaker sut1 = new PasswordBreaker();
+            IPasswordBreaker sut1 = new PasswordBreaker(100f);
             IGameKey gameKey = new MockGameKey();
 
             sut1.AddToBreakList(gameKey);
@@ -35,7 +35,7 @@ namespace Tests
         [Test]
         public void RemoveFromBreakList()
         {
-            IPasswordBreaker sut1 = new PasswordBreaker();
+            IPasswordBreaker sut1 = new PasswordBreaker(100f);
             IGameKey gameKey1 = new MockGameKey();
             IGameKey gameKey2 = new MockGameKey();
 
@@ -56,7 +56,7 @@ namespace Tests
         [Test]
         public void Crack([Values(10f, 10000f, float.MaxValue)]float crackPower)
         {
-            IPasswordBreaker sut1 = new PasswordBreaker();
+            IPasswordBreaker sut1 = new PasswordBreaker(100f);
             MockGameKey gameKey1 = new MockGameKey();
             MockGameKey gameKey2 = new MockGameKey();
 

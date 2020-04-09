@@ -8,19 +8,17 @@ namespace com.runtime.GameDev101Jam
 {
     public static class DictionaryExtensions
     {
-        public static Dictionary<TKey, TValue> Combine<TKey, TValue>(this Dictionary<TKey, TValue> current, params Dictionary<TKey, TValue>[] dictionaries)
+        public static IDictionary<TKey, TValue> Concat<TKey, TValue>(this IDictionary<TKey, TValue> current, params IDictionary<TKey, TValue>[] dictionaries)
         {
-            Dictionary<TKey, TValue> completeDic = current;
-
-            foreach (var dic in dictionaries)
+            foreach (var dict in dictionaries)
             {
-                foreach (var item in dic)
+                foreach (var item in dict)
                 {
-                    completeDic.Add(item.Key, item.Value);
+                    current.Add(item.Key, item.Value);
                 }
             }
 
-            return completeDic;
+            return current;
         }
     }
 }

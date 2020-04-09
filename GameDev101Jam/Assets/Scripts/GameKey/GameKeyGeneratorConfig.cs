@@ -9,9 +9,11 @@ namespace com.runtime.GameDev101Jam
     {
         readonly float _maxDiff, _minDiff;
         readonly int _maxLen, _minLen;
+        //TODO! _allTokens should be dynamic, is hard to maintain
         readonly string[] _tokens, _allTokens = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "y", "x", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "Y", "X", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
         readonly string _wildcard;
 
+        //TODO need refactor
         public GameKeyGeneratorConfig(float maxDiff, float minDiff, int maxLen, int minLen, string[] tokens, string wildcard)
         {
             if (maxDiff <= 0f || minDiff <= 0f)

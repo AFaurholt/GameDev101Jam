@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace com.runtime.GameDev101Jam
 {
-    public class PlayerBehaviouer : MonoBehaviour
+    public class PlayerBehaviouerLegacy : MonoBehaviour
     {
         [SerializeField] private float _baseCpuPower = 100f;
         private Dictionary<InventoryItem, float> _cpuAllocation;
