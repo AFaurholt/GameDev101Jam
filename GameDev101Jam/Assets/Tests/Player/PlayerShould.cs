@@ -4,6 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using com.runtime.GameDev101Jam;
+using System.Linq;
 
 namespace Tests
 {
@@ -33,7 +34,7 @@ namespace Tests
             mockCpu1.AddAllocation(mockProcess1, 0.1f);
 
             Assert.That(sut.AllGameCpuProcesses,
-                Is.EqualTo(new List<IGameCpuProcess> { mockProcess1 }));
+                Is.EqualTo(new List<IGameProcess> { mockProcess1 }));
         }
 
         [Test]
@@ -57,25 +58,28 @@ namespace Tests
         {
             public List<IGameCpu> Cores { get; } = new List<IGameCpu>();
         }
-        class MockGameCpuProcess : IGameCpuProcess
+        class MockGameCpuProcess : IGameProcess
         {
             public float timeLapse = 0f;
             public float ProcessCost => throw new System.NotImplementedException();
-
-            public IGameCpu Handler => throw new System.NotImplementedException();
-
             public bool IsRunning => true;
+
+            public GameProcessOption GameProcessOption { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
+            IGameProcessHandler IGameProcess.Handler => throw new System.NotImplementedException();
+
+            public event OnComplete OnCompleteListener;
+            public event OnPause OnPauseListener;
+            public event OnStart OnStartListener;
 
             public void Execute(float deltaTime)
             {
                 timeLapse += deltaTime;
             }
-
             public void Pause()
             {
                 throw new System.NotImplementedException();
             }
-
             public void Start()
             {
                 throw new System.NotImplementedException();
@@ -89,37 +93,41 @@ namespace Tests
 
             public float CurrentCapacity => throw new System.NotImplementedException();
 
-            public IDictionary<IGameCpuProcess, float> CpuAllocations { get; } = new Dictionary<IGameCpuProcess, float>();
-
             public float Hrtz => 1;
 
-            public bool AddAllocation(IGameCpuProcess gameCpuProcess, float percentageAllocated)
+            public HashSet<GameCpuAllocation> CpuAllocations { get; } = new HashSet<GameCpuAllocation>();
+
+            public List<IGameProcess> GameProcesses =>
+                (from alloc in CpuAllocations
+                 select alloc.GameProcess).ToList();
+
+            public bool AddAllocation(IGameProcess gameCpuProcess, float percentageAllocated)
             {
-                CpuAllocations.Add(gameCpuProcess, 0f);
+                CpuAllocations.Add(new GameCpuAllocation(percentageAllocated, gameCpuProcess));
                 return true;
             }
 
-            public bool ChangeAllocationPercentage(IGameCpuProcess gameCpuProcess, float value)
+            public bool ChangeAllocationPercentage(IGameProcess gameCpuProcess, float value)
             {
                 throw new System.NotImplementedException();
             }
 
-            public bool CombineAllocation(Dictionary<IGameCpuProcess, float> allocations)
+            public bool CombineAllocation(HashSet<GameCpuAllocation> allocations)
             {
                 throw new System.NotImplementedException();
             }
 
-            public bool CombineAllocation(IDictionary<IGameCpuProcess, float> allocations)
+            public float GetPowerForProcess(IGameProcess gameCpuProcess)
             {
                 throw new System.NotImplementedException();
             }
 
-            public float GetPowerForProcess(IGameCpuProcess gameCpuProcess)
+            public bool RemoveAllocation(IGameProcess gameCpuProcess)
             {
                 throw new System.NotImplementedException();
             }
 
-            public void RemoveAllocation(IGameCpuProcess gameCpuProcess)
+            public bool TryGetCpuAllocationByProcess(IGameProcess gameProcess, out GameCpuAllocation result)
             {
                 throw new System.NotImplementedException();
             }

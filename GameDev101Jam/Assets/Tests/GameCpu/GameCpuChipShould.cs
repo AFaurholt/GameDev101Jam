@@ -31,33 +31,45 @@ namespace Tests
 
             public float MaxCapacity => throw new System.NotImplementedException();
 
-            public IDictionary<IGameCpuProcess, float> CpuAllocations => throw new System.NotImplementedException();
-
             public float CurrentCapacity => throw new System.NotImplementedException();
 
             public float Hrtz => throw new System.NotImplementedException();
 
-            public bool AddAllocation(IGameCpuProcess gameCpuProcess, float percentageAllocated)
+            public List<IGameProcess> GameProcesses => throw new System.NotImplementedException();
+
+            HashSet<GameCpuAllocation> IGameCpu.CpuAllocations => throw new System.NotImplementedException();
+
+            public bool AddAllocation(IGameProcess gameCpuProcess, float percentageAllocated)
             {
                 throw new System.NotImplementedException();
             }
 
-            public bool ChangeAllocationPercentage(IGameCpuProcess gameCpuProcess, float value)
+            public bool ChangeAllocationPercentage(IGameProcess gameCpuProcess, float value)
             {
                 throw new System.NotImplementedException();
             }
 
-            public bool CombineAllocation(IDictionary<IGameCpuProcess, float> allocations)
+            public bool CombineAllocation(IDictionary<IGameProcess, float> allocations)
             {
                 throw new System.NotImplementedException();
             }
 
-            public float GetPowerForProcess(IGameCpuProcess gameCpuProcess)
+            public bool CombineAllocation(HashSet<GameCpuAllocation> allocations)
             {
                 throw new System.NotImplementedException();
             }
 
-            public void RemoveAllocation(IGameCpuProcess gameCpuProcess)
+            public float GetPowerForProcess(IGameProcess gameCpuProcess)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public bool RemoveAllocation(IGameProcess gameCpuProcess)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public bool TryGetCpuAllocationByProcess(IGameProcess gameProcess, out GameCpuAllocation result)
             {
                 throw new System.NotImplementedException();
             }

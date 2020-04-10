@@ -1,31 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CoverageReport scope="Summary">
   <Summary>
-    <Generatedon>08/04/2020 - 23:02:03</Generatedon>
-    <Parser>MultiReportParser (38x CoberturaParser, 1x OpenCoverParser)</Parser>
+    <Generatedon>10/04/2020 - 02:37:04</Generatedon>
+    <Parser>MultiReportParser (40x CoberturaParser, 1x OpenCoverParser)</Parser>
     <Assemblies>1</Assemblies>
-    <Classes>27</Classes>
-    <Files>27</Files>
-    <Coveredlines>300</Coveredlines>
-    <Uncoveredlines>300</Uncoveredlines>
-    <Coverablelines>600</Coverablelines>
-    <Totallines>1258</Totallines>
-    <Linecoverage>50</Linecoverage>
+    <Classes>28</Classes>
+    <Files>28</Files>
+    <Coveredlines>341</Coveredlines>
+    <Uncoveredlines>327</Uncoveredlines>
+    <Coverablelines>668</Coverablelines>
+    <Totallines>1349</Totallines>
+    <Linecoverage>51</Linecoverage>
     <Coveredbranches>0</Coveredbranches>
     <Totalbranches>0</Totalbranches>
   </Summary>
   <Coverage>
-    <Assembly name="HackingGame" classes="27" coverage="50" coveredlines="300" coverablelines="600" totallines="1258" branchcoverage="" coveredbranches="0" totalbranches="0">
+    <Assembly name="HackingGame" classes="28" coverage="51" coveredlines="341" coverablelines="668" totallines="1349" branchcoverage="" coveredbranches="0" totalbranches="0">
       <Class name="com.runtime.GameDev101Jam.ConnectLineBehaviour" coverage="0" coveredlines="0" coverablelines="13" totallines="28" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="com.runtime.GameDev101Jam.DictionaryExtensions" coverage="100" coveredlines="11" coverablelines="11" totallines="26" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="com.runtime.GameDev101Jam.GameCpu" coverage="100" coveredlines="96" coverablelines="96" totallines="146" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.DictionaryExtensions" coverage="0" coveredlines="0" coverablelines="10" totallines="24" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.GameCpu" coverage="87.7" coveredlines="100" coverablelines="114" totallines="164" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.GameCpuAllocation" coverage="100" coveredlines="7" coverablelines="7" totallines="22" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="com.runtime.GameDev101Jam.GameCpuChip" coverage="100" coveredlines="12" coverablelines="12" totallines="24" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="com.runtime.GameDev101Jam.GameKey" coverage="100" coveredlines="39" coverablelines="39" totallines="77" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="com.runtime.GameDev101Jam.GameKeyGenerator" coverage="100" coveredlines="46" coverablelines="46" totallines="81" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="com.runtime.GameDev101Jam.GameKeyGeneratorConfig" coverage="100" coveredlines="45" coverablelines="45" totallines="74" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="com.runtime.GameDev101Jam.GameKeyPart" coverage="100" coveredlines="11" coverablelines="11" totallines="33" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.GameKey" coverage="100" coveredlines="38" coverablelines="38" totallines="74" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.GameKeyGenerator" coverage="100" coveredlines="70" coverablelines="70" totallines="111" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.GameKeyGeneratorConfig" coverage="100" coveredlines="45" coverablelines="45" totallines="76" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.GameKeyPart" coverage="100" coveredlines="11" coverablelines="11" totallines="30" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="com.runtime.GameDev101Jam.Inventory" coverage="0" coveredlines="0" coverablelines="3" totallines="17" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="com.runtime.GameDev101Jam.PasswordBreaker" coverage="56.7" coveredlines="21" coverablelines="37" totallines="67" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.PasswordBreaker" coverage="50.9" coveredlines="26" coverablelines="51" totallines="81" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="com.runtime.GameDev101Jam.PasswordBreakerLegacy" coverage="0" coveredlines="0" coverablelines="12" totallines="25" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="com.runtime.GameDev101Jam.PhysicsPointerBehaviour" coverage="0" coveredlines="0" coverablelines="8" totallines="27" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="com.runtime.GameDev101Jam.PlayableNodeBehaviour" coverage="0" coveredlines="0" coverablelines="17" totallines="44" branchcoverage="" coveredbranches="0" totalbranches="0" />
@@ -33,9 +34,9 @@
       <Class name="com.runtime.GameDev101Jam.PlayableNodeGraph" coverage="0" coveredlines="0" coverablelines="1" totallines="14" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="com.runtime.GameDev101Jam.PlayablePassword" coverage="0" coveredlines="0" coverablelines="18" totallines="55" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="com.runtime.GameDev101Jam.PlayablePasswordSetting" coverage="0" coveredlines="0" coverablelines="8" totallines="31" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="com.runtime.GameDev101Jam.Player" coverage="100" coveredlines="19" coverablelines="19" totallines="44" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.Player" coverage="100" coveredlines="25" coverablelines="25" totallines="54" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="com.runtime.GameDev101Jam.PlayerBehaviouerLegacy" coverage="0" coveredlines="0" coverablelines="63" totallines="103" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="com.runtime.GameDev101Jam.PlayerBehaviour" coverage="0" coveredlines="0" coverablelines="12" totallines="29" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="com.runtime.GameDev101Jam.PlayerBehaviour" coverage="53.8" coveredlines="7" coverablelines="13" totallines="32" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="com.runtime.GameDev101Jam.PointerSelectionBehaviour" coverage="0" coveredlines="0" coverablelines="28" totallines="57" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="com.runtime.GameDev101Jam.PortEdge" coverage="0" coveredlines="0" coverablelines="1" totallines="21" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="com.runtime.GameDev101Jam.PortNode" coverage="0" coveredlines="0" coverablelines="44" totallines="87" branchcoverage="" coveredbranches="0" totalbranches="0" />

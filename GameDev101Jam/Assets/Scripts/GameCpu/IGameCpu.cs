@@ -12,11 +12,14 @@ namespace com.runtime.GameDev101Jam
         float MaxCapacity { get; }
         float CurrentCapacity { get; }
         float Hrtz { get; }
-        IDictionary<IGameCpuProcess, float> CpuAllocations { get; }
-        bool AddAllocation(IGameCpuProcess gameCpuProcess, float percentageAllocated);
-        bool CombineAllocation(IDictionary<IGameCpuProcess, float> allocations);
-        void RemoveAllocation(IGameCpuProcess gameCpuProcess);
-        float GetPowerForProcess(IGameCpuProcess gameCpuProcess);
-        bool ChangeAllocationPercentage(IGameCpuProcess gameCpuProcess, float value);
+        HashSet<GameCpuAllocation> CpuAllocations { get; }
+        List<IGameProcess> GameProcesses { get; }
+
+        bool AddAllocation(IGameProcess gameCpuProcess, float percentageAllocated);
+        bool CombineAllocation(HashSet<GameCpuAllocation> allocations);
+        bool RemoveAllocation(IGameProcess gameCpuProcess);
+        float GetPowerForProcess(IGameProcess gameCpuProcess);
+        bool ChangeAllocationPercentage(IGameProcess gameCpuProcess, float value);
+        bool TryGetCpuAllocationByProcess(IGameProcess gameProcess, out GameCpuAllocation result);
     }
 }

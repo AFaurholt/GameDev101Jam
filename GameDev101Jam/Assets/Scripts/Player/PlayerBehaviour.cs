@@ -16,7 +16,7 @@ namespace com.runtime.GameDev101Jam
 
         public List<IGameCpu> AllCores => _playerData.AllCores;
 
-        public List<IGameCpuProcess> AllGameCpuProcesses => _playerData.AllGameCpuProcesses;
+        public List<IGameProcess> AllGameCpuProcesses => _playerData.AllGameCpuProcesses;
 
         public void UpdateAllRunningProcesses(float deltaTime)
         {
@@ -25,7 +25,8 @@ namespace com.runtime.GameDev101Jam
 
         private void FixedUpdate()
         {
-            _playerData.UpdateAllRunningProcesses(Time.fixedDeltaTime);
+            float fixTime = Time.fixedDeltaTime;
+            _playerData.UpdateAllRunningProcesses(fixTime);
         }
     }
 }

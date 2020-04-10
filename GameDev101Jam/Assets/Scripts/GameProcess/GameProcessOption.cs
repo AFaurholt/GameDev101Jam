@@ -6,5 +6,10 @@ using System.Threading.Tasks;
 
 namespace com.runtime.GameDev101Jam
 {
-    public interface IGameCpuProcess : IGameProcess<IGameCpu> { }
+    public enum GameProcessOption
+    {
+        None,
+        Repeat,
+        Remove
+    }
 }

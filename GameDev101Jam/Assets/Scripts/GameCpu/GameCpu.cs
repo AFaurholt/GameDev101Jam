@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace com.runtime.GameDev101Jam
 {
-    public class GameCpu : IGameCpu
+    public class GameCpu : IGameCpu, IGameProcessHandler
     {
         public GameCpu(float power, float maxCapacity)
         {
@@ -20,116 +20,145 @@ namespace com.runtime.GameDev101Jam
 
         public float Power { get; }
         public float MaxCapacity { get; }
-        public IDictionary<IGameCpuProcess, float> CpuAllocations { get; private set; } = new Dictionary<IGameCpuProcess, float>();
-        public float CurrentCapacity => CpuAllocations.Keys.Sum(x => x.ProcessCost);
+        public float CurrentCapacity => CpuAllocations.Sum(x => x.GameProcess.ProcessCost);
         public float Hrtz { get; }
+        public HashSet<GameCpuAllocation> CpuAllocations { get; } = new HashSet<GameCpuAllocation>();
 
-        public bool AddAllocation(IGameCpuProcess gameCpuProcess, float percentageAllocated)
+        public List<IGameProcess> GameProcesses =>
+            (from alloc in CpuAllocations
+             select alloc.GameProcess).ToList();
+
+        public float ExecutionInterval => Hrtz;
+
+        public bool AddAllocation(IGameProcess gameCpuProcess, float percentageAllocated)
         {
-            float currentCap = 0f;
-            foreach (var item in CpuAllocations)
-            {
-                currentCap += item.Key.ProcessCost;
-            }
+            float currentCap = CpuAllocations.Sum(x => x.GameProcess.ProcessCost);
 
             if (MaxCapacity < currentCap + gameCpuProcess.ProcessCost)
             {
                 return false;
             }
+
+            if (!(CpuAllocations.Count > 0))
+            {
+                return CpuAllocations.Add(new GameCpuAllocation(1f, gameCpuProcess));
+            }
             else
             {
-                if (!(CpuAllocations.Count > 0))
+                var newAlloc = new GameCpuAllocation(percentageAllocated, gameCpuProcess);
+                if (CpuAllocations.Add(newAlloc))
                 {
-                    CpuAllocations.Add(gameCpuProcess, 1f);
-                }
-                else
-                {
-                    ChangeAllAllocationsToFitNewValue(null, percentageAllocated, 0f);
-                    CpuAllocations.Add(gameCpuProcess, percentageAllocated);
+                    ChangeAllAllocationsToFitNewValue(newAlloc.GameProcess, percentageAllocated, 0f);
+                    return true;
                 }
 
-                return true;
+                return false;
             }
         }
-        public bool CombineAllocation(IDictionary<IGameCpuProcess, float> allocations)
+        public bool CombineAllocation(HashSet<GameCpuAllocation> allocations)
         {
-            float targetSize = allocations.Keys.Sum(x => x.ProcessCost);
+            float targetSize = allocations.Sum(x => x.GameProcess.ProcessCost);
             if (MaxCapacity < (CurrentCapacity + targetSize))
             {
                 return false;
             }
+            if (!(CpuAllocations.Count > 0))
+            {
+                foreach (var item in allocations)
+                {
+                    CpuAllocations.Add(item);
+                }
+
+            }
             else
             {
-                if (CpuAllocations.Count > 0)
+                float adjustment = 2f;
+                foreach (var item in allocations)
                 {
-                    IDictionary<IGameCpuProcess, float> newDicCurrent =
-                        new Dictionary<IGameCpuProcess, float>();
-                    IDictionary<IGameCpuProcess, float> newDicCombine =
-                        new Dictionary<IGameCpuProcess, float>();
+                    if (!CpuAllocations.Add(item))
+                    {
+                        adjustment -= item.PercentageAllocation;
+                    }
+                }
+                foreach (var item in CpuAllocations)
+                {
+                    item.PercentageAllocation /= adjustment;
+                }
+            }
 
-                    foreach (var item in CpuAllocations)
-                    {
-                        float tmp = item.Value * (allocations.Values.Sum() / 2);
-                        newDicCurrent.Add(item.Key, tmp);
-                    }
-                    foreach (var item in allocations)
-                    {
-                        float tmp = item.Value * (CpuAllocations.Values.Sum() / 2);
-                        newDicCombine.Add(item.Key, tmp);
-                    }
-                    CpuAllocations = newDicCurrent.Concat(newDicCombine);
-                }
-                else
-                {
-                    CpuAllocations = allocations;
-                }
+            return true;
+        }
+        public bool ChangeAllocationPercentage(IGameProcess gameCpuProcess, float value)
+        {
+            if (TryGetCpuAllocationByProcess(gameCpuProcess, out GameCpuAllocation result))
+            {
+                ChangeAllAllocationsToFitNewValue(gameCpuProcess, value, result.PercentageAllocation);
+                result.PercentageAllocation = value;
+
                 return true;
             }
+
+            return false;
         }
-        public bool ChangeAllocationPercentage(IGameCpuProcess gameCpuProcess, float value)
+        public float GetPowerForProcess(IGameProcess gameCpuProcess)
         {
-            bool result = false;
-            if (CpuAllocations.ContainsKey(gameCpuProcess))
+            if (TryGetCpuAllocationByProcess(gameCpuProcess, out GameCpuAllocation result))
             {
-                ChangeAllAllocationsToFitNewValue(gameCpuProcess, value, CpuAllocations[gameCpuProcess]);
-                result = true;
+                return result.PercentageAllocation * Power;
             }
 
-            return result;
+            throw new ArgumentException("IGameProcess not found");
         }
-        public float GetPowerForProcess(IGameCpuProcess gameCpuProcess)
+        public bool RemoveAllocation(IGameProcess gameCpuProcess)
         {
-            return CpuAllocations[gameCpuProcess] * Power;
-        }
-        public void RemoveAllocation(IGameCpuProcess gameCpuProcess)
-        {
-            float percentage = CpuAllocations[gameCpuProcess];
-            CpuAllocations.Remove(gameCpuProcess);
-            ChangeAllAllocationsToFitNewValue(null, 0, percentage);
-        }
+            if (TryGetCpuAllocationByProcess(gameCpuProcess, out GameCpuAllocation result))
+            {
+                CpuAllocations.Remove(result);
+                ChangeAllAllocationsToFitNewValue(null, 0, result.PercentageAllocation);
+                return true;
+            }
 
-        private void ChangeAllAllocationsToFitNewValue(IGameCpuProcess gameCpuProcessToFit, float newValue, float oldValue)
+            return false;
+        }
+        private void ChangeAllAllocationsToFitNewValue(IGameProcess process, float newValue, float oldValue)
         {
-            Dictionary<IGameCpuProcess, float> newDic = new Dictionary<IGameCpuProcess, float>();
-
             foreach (var item in CpuAllocations)
             {
-                if (item.Key == gameCpuProcessToFit)
+                if (!(item.GameProcess == process))
                 {
-                    newDic.Add(gameCpuProcessToFit, newValue);
-                }
-                else
-                {
-                    float tmp = ModifyPercentageEvenlyToFitChange(item.Value, oldValue, newValue);
-                    newDic.Add(item.Key, tmp);
+                    item.PercentageAllocation = ModifyPercentageEvenlyToFitChange(item.PercentageAllocation, oldValue, newValue);
                 }
             }
-
-            CpuAllocations = newDic;
         }
         private float ModifyPercentageEvenlyToFitChange(float changeTarget, float oldValue, float newValue)
         {
             return changeTarget * (1 + ((oldValue - newValue) / (1 - oldValue)));
+        }
+
+        //TODO incremental implementation
+        public void SubscribeToProcess(IGameProcess gameProcess, GameProcessOption processOption)
+        {
+            gameProcess.OnCompleteListener += RemoveAllocatedOnComplete;
+        }
+        public void UnsubscribeToProcess(IGameProcess gameProcess)
+        {
+            gameProcess.OnCompleteListener -= RemoveAllocatedOnComplete;
+        }
+        private void RemoveAllocatedOnComplete(IGameProcess caller) { }
+        public bool TryGetCpuAllocationByProcess(IGameProcess gameProcess, out GameCpuAllocation result)
+        {
+            var enumerator = CpuAllocations.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                if (enumerator.Current.GameProcess == gameProcess)
+                {
+                    result = enumerator.Current;
+                    return true;
+                }
+            }
+
+            result = default;
+            return false;
         }
     }
 }

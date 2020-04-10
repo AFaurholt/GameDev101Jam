@@ -16,9 +16,14 @@ namespace com.runtime.GameDev101Jam
         }
 
         public HashSet<IGameKey> BreakList { get; } = new HashSet<IGameKey>();
-        public IGameCpu Handler { get; private set; }
         public float ProcessCost { get; }
         public bool IsRunning { get; private set; } = false;
+        public GameProcessOption GameProcessOption { get; set; } = GameProcessOption.None;
+        public IGameProcessHandler Handler { get; }
+
+        public event OnComplete OnCompleteListener;
+        public event OnPause OnPauseListener;
+        public event OnStart OnStartListener;
 
         public void AddToBreakList(IGameKey gameKey)
         {
@@ -66,11 +71,11 @@ namespace com.runtime.GameDev101Jam
         }
         private bool IsTimeLapseReached()
         {
-            return _timeLapse >= Handler.Hrtz;
+            return _timeLapse >= Handler.ExecutionInterval;
         }
         private void RewindTimeLapse()
         {
-            _timeLapse -= Handler.Hrtz;
+            _timeLapse -= Handler.ExecutionInterval;
         }
     }
 }

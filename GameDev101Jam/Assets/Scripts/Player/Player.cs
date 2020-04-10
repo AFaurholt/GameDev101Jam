@@ -11,19 +11,21 @@ namespace com.runtime.GameDev101Jam
         public float TraceCurrent { get; set; }
         public float TraceMax { get; set; }
 
-        public List<IGameCpuProcess> AllGameCpuProcesses
+        public List<IGameProcess> AllGameCpuProcesses
         {
             get
             {
-                List<IGameCpuProcess> allProcesses = new List<IGameCpuProcess>();
+                List<IGameProcess> gameProcesses = new List<IGameProcess>();
+
                 foreach (var item in AllCores)
                 {
-                    allProcesses.AddRange(item.CpuAllocations.Keys);
+                    gameProcesses.AddRange(item.GameProcesses);
                 }
 
-                return allProcesses;
+                return gameProcesses;
             }
         }
+
 
         public List<IGameCpuChip> AllInstalledChips { get; } = new List<IGameCpuChip>();
 
@@ -43,7 +45,7 @@ namespace com.runtime.GameDev101Jam
 
         public void UpdateAllRunningProcesses(float deltaTime)
         {
-            foreach (IGameCpuProcess item in AllGameCpuProcesses.Where(x => x.IsRunning))
+            foreach (IGameProcess item in AllGameCpuProcesses.Where(x => x.IsRunning))
             {
                 item.Execute(deltaTime);
             }

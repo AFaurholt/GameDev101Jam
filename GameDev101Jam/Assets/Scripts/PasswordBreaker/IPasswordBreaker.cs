@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace com.runtime.GameDev101Jam
 {
-    public interface IPasswordBreaker : IGameCpuProcess
+    public interface IPasswordBreaker : IGameProcess
     {
         HashSet<IGameKey> BreakList { get; }
         void AddToBreakList(IGameKey gameKey);

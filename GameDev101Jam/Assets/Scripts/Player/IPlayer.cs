@@ -12,7 +12,7 @@ namespace com.runtime.GameDev101Jam
         float TraceMax { get; set; }
         List<IGameCpuChip> AllInstalledChips { get; }
         List<IGameCpu> AllCores { get; }
-        List<IGameCpuProcess> AllGameCpuProcesses { get; }
+        List<IGameProcess> AllGameCpuProcesses { get; }
         void UpdateAllRunningProcesses(float deltaTime);
     }
 }
