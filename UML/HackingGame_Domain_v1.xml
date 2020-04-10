@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-04-09T01:42:04.166Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:74.0) Gecko/20100101 Firefox/74.0" etag="xY9OmHYbnDIJbgOzeiO1" version="12.9.3" type="github">
+<mxfile host="app.diagrams.net" modified="2020-04-10T00:43:36.440Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:74.0) Gecko/20100101 Firefox/74.0" etag="dJJ61jVobM3JcrvwPwX5" version="12.9.3" type="github">
   <diagram id="PYrWHoGaozBdfY71hXEj" name="Page-1">
     <mxGraphModel dx="4981" dy="2100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -543,7 +543,31 @@
           <mxGeometry y="108" width="264" height="26" as="geometry" />
         </mxCell>
         <mxCell id="nM9zhCIVVoCOJuW-OBGj-129" value="&lt;div&gt;TODO&lt;/div&gt;&lt;div&gt;Create command pattern for repeating or removing process when done&lt;br&gt;&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fontFamily=Lucida Console;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="-1520" y="420" width="240" height="80" as="geometry" />
+          <mxGeometry x="-1600" y="-160" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="nM9zhCIVVoCOJuW-OBGj-134" value="IGameProcessCommandHandler&#xa;&lt;&lt;interface&gt;&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=42;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontFamily=Lucida Console;" vertex="1" parent="1">
+          <mxGeometry x="-1830" y="-530" width="290" height="102" as="geometry" />
+        </mxCell>
+        <mxCell id="nM9zhCIVVoCOJuW-OBGj-135" value="---" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Lucida Console;" vertex="1" parent="nM9zhCIVVoCOJuW-OBGj-134">
+          <mxGeometry y="42" width="290" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="nM9zhCIVVoCOJuW-OBGj-136" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;fontFamily=Lucida Console;" vertex="1" parent="nM9zhCIVVoCOJuW-OBGj-134">
+          <mxGeometry y="68" width="290" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="nM9zhCIVVoCOJuW-OBGj-137" value="+ Execute(options: Array&lt;enum&gt;): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Lucida Console;" vertex="1" parent="nM9zhCIVVoCOJuW-OBGj-134">
+          <mxGeometry y="76" width="290" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="nM9zhCIVVoCOJuW-OBGj-130" value="IGameProcessCommand&#xa;&lt;&lt;interface&gt;&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=42;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontFamily=Lucida Console;" vertex="1" parent="1">
+          <mxGeometry x="-1470" y="-530" width="290" height="102" as="geometry" />
+        </mxCell>
+        <mxCell id="nM9zhCIVVoCOJuW-OBGj-131" value="---" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Lucida Console;" vertex="1" parent="nM9zhCIVVoCOJuW-OBGj-130">
+          <mxGeometry y="42" width="290" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="nM9zhCIVVoCOJuW-OBGj-132" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;fontFamily=Lucida Console;" vertex="1" parent="nM9zhCIVVoCOJuW-OBGj-130">
+          <mxGeometry y="68" width="290" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="nM9zhCIVVoCOJuW-OBGj-133" value="+ Execute(options: Array&lt;enum&gt;): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Lucida Console;" vertex="1" parent="nM9zhCIVVoCOJuW-OBGj-130">
+          <mxGeometry y="76" width="290" height="26" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
